@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokr.Web", "pokr.web\Pokr.Web.csproj", "{74102D9F-D834-4AA3-AB0A-B251B1E0C5AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokr.Domain", "pokr.domain\Pokr.Domain.csproj", "{534E856B-CD45-41F1-ADBC-452444E67327}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokr.Tests.Unit", "pokr.tests.unit\Pokr.Tests.Unit.csproj", "{619C7024-8608-4256-A92D-06D10C48E15C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74102D9F-D834-4AA3-AB0A-B251B1E0C5AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74102D9F-D834-4AA3-AB0A-B251B1E0C5AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74102D9F-D834-4AA3-AB0A-B251B1E0C5AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74102D9F-D834-4AA3-AB0A-B251B1E0C5AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{534E856B-CD45-41F1-ADBC-452444E67327}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{534E856B-CD45-41F1-ADBC-452444E67327}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{534E856B-CD45-41F1-ADBC-452444E67327}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{534E856B-CD45-41F1-ADBC-452444E67327}.Release|Any CPU.Build.0 = Release|Any CPU
+		{619C7024-8608-4256-A92D-06D10C48E15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{619C7024-8608-4256-A92D-06D10C48E15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{619C7024-8608-4256-A92D-06D10C48E15C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{619C7024-8608-4256-A92D-06D10C48E15C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

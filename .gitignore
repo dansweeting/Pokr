@@ -1,0 +1,5 @@
+*ReSharper*.*
+*.suo
+*[Pp]okr*.*/bin
+*[Pp]okr*.*/obj
+*.csproj.user
