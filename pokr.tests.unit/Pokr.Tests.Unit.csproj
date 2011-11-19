@@ -53,6 +53,7 @@
     <Compile Include="HoldEmHandTests.cs" />
     <Compile Include="FlushEvaluatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StraightEvaluatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

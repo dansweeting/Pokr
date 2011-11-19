@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokr.Domain", "pokr.domain\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokr.Tests.Unit", "pokr.tests.unit\Pokr.Tests.Unit.csproj", "{619C7024-8608-4256-A92D-06D10C48E15C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{495812C7-DD6A-4A6C-90A6-C485360EFF73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{619C7024-8608-4256-A92D-06D10C48E15C} = {495812C7-DD6A-4A6C-90A6-C485360EFF73}
 	EndGlobalSection
 EndGlobal

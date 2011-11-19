@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using Pokr.Domain;
+using Pokr.Domain.Evaluators;
 using Pokr.Domain.HoldEm;
 
 namespace Pokr.Tests.Unit

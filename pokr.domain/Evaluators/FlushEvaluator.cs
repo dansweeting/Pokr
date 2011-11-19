@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using System.Linq;
 using Pokr.Domain.HoldEm;
 
-namespace Pokr.Domain
+namespace Pokr.Domain.Evaluators
 {
     public class FlushEvaluator : IHandEvaluator
     {
