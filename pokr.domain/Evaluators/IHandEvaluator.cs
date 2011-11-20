@@ -1,6 +1,6 @@
 using Pokr.Domain.HoldEm;
 
-namespace Pokr.Domain
+namespace Pokr.Domain.Evaluators
 {
     public interface IHandEvaluator
     {

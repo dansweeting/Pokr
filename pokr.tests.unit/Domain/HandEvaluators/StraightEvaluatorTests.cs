@@ -3,7 +3,7 @@ using Pokr.Domain;
 using Pokr.Domain.Evaluators;
 using Pokr.Domain.HoldEm;
 
-namespace Pokr.Tests.Unit
+namespace Pokr.Tests.Unit.Domain.HandEvaluators
 {
     [TestFixture]
     public class StraightEvaluatorTests

@@ -1,10 +1,10 @@
+using System.Linq;
 using NUnit.Framework;
 using Pokr.Domain;
 using Pokr.Domain.Evaluators;
 using Pokr.Domain.HoldEm;
-using System.Linq;
 
-namespace Pokr.Tests.Unit
+namespace Pokr.Tests.Unit.Domain.HandEvaluators
 {
     [TestFixture]
     public class FourOfAKindEvaluatorTests

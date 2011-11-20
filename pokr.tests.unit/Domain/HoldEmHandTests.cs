@@ -2,9 +2,8 @@ using System;
 using NUnit.Framework;
 using Pokr.Domain;
 using Pokr.Domain.HoldEm;
-using The = Pokr.Domain.Picture;
 
-namespace Pokr.Tests.Unit
+namespace Pokr.Tests.Unit.Domain
 {
     [TestFixture]
     public class HoldEmHandTests
@@ -14,12 +13,12 @@ namespace Pokr.Tests.Unit
         {
             var hand = new Hand();
 
-            hand.Add(The.King.Of(Suit.Spades));
-            hand.Add(The.Queen.Of(Suit.Hearts));
+            hand.Add(Picture.King.Of(Suit.Spades));
+            hand.Add(Picture.Queen.Of(Suit.Hearts));
             hand.Add( 1.Of(Suit.Diamonds));
 
-            Assert.That(hand.Cards.Contains(The.King.Of(Suit.Spades)), Is.True);
-            Assert.That(hand.Cards.Contains(The.Queen.Of(Suit.Hearts)), Is.True);
+            Assert.That(hand.Cards.Contains(Picture.King.Of(Suit.Spades)), Is.True);
+            Assert.That(hand.Cards.Contains(Picture.Queen.Of(Suit.Hearts)), Is.True);
         }
 
         [Test]

@@ -49,13 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeckTests.cs" />
-    <Compile Include="FourOfAKindEvaluatorTests.cs" />
-    <Compile Include="FullHouseEvaluatorTests.cs" />
-    <Compile Include="HoldEmHandTests.cs" />
-    <Compile Include="FlushEvaluatorTests.cs" />
+    <Compile Include="Domain\DeckTests.cs" />
+    <Compile Include="Domain\HandEvaluators\FlushEvaluatorTests.cs" />
+    <Compile Include="Domain\HandEvaluators\FourOfAKindEvaluatorTests.cs" />
+    <Compile Include="Domain\HandEvaluators\FullHouseEvaluatorTests.cs" />
+    <Compile Include="Domain\HandEvaluators\StraightEvaluatorTests.cs" />
+    <Compile Include="Domain\HoldEmHandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StraightEvaluatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

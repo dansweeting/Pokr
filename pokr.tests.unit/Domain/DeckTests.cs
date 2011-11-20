@@ -1,9 +1,8 @@
-﻿using System;
 using System.Linq;
 using NUnit.Framework;
 using Pokr.Domain;
 
-namespace Pokr.Tests.Unit
+namespace Pokr.Tests.Unit.Domain
 {
     [TestFixture]
     public class DeckTests
