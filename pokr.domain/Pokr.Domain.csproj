@@ -43,6 +43,7 @@
     <Compile Include="Card.cs" />
     <Compile Include="CardExtensions.cs" />
     <Compile Include="Deck.cs" />
+    <Compile Include="IPokerHandEvaluator.cs" />
     <Compile Include="PatternMatchers\Flush.cs" />
     <Compile Include="PatternMatchers\FourOfAKind.cs" />
     <Compile Include="PatternMatchers\FullHouse.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="PatternMatchers\StraightFlush.cs" />
     <Compile Include="PatternMatchers\ThreeOfAKind.cs" />
     <Compile Include="PatternMatchers\TwoPair.cs" />
+    <Compile Include="PokerHandComparer.cs" />
     <Compile Include="PokerHandEvaluator.cs" />
     <Compile Include="PokerHandScore.cs" />
     <Compile Include="Rank.cs" />

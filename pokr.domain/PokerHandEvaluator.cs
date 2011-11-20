@@ -6,7 +6,7 @@ using Pokr.Domain.PatternMatchers;
 
 namespace Pokr.Domain
 {
-    public class PokerHandEvaluator
+    public class PokerHandEvaluator : IPokerHandEvaluator
     {
         private static readonly Dictionary<Rank, IHandPatternMatcher> PatternLookup =
             new Dictionary<Rank, IHandPatternMatcher>

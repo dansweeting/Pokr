@@ -12,5 +12,6 @@ namespace Pokr.Domain
             Cards = cards;
             Rank = rank;
         }
+
     }
 }
