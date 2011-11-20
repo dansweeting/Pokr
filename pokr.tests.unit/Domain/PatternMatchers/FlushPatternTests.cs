@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Pokr.Domain;
-using Pokr.Domain.Evaluators;
 using Pokr.Domain.HoldEm;
+using Pokr.Domain.PatternMatchers;
 
 namespace Pokr.Tests.Unit.Domain.PatternMatchers
 {

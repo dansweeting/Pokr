@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Pokr.Domain.HoldEm;
 using System.Linq;
 
-namespace Pokr.Domain.Evaluators
+namespace Pokr.Domain.PatternMatchers
 {
     internal class Straight : IHandPatternMatcher
     {

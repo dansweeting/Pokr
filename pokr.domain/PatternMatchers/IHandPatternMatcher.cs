@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Pokr.Domain.HoldEm;
 
-namespace Pokr.Domain.Evaluators
+namespace Pokr.Domain.PatternMatchers
 {
     public interface IHandPatternMatcher
     {

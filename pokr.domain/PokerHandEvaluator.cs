@@ -1,38 +1,32 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Pokr.Domain.Evaluators;
 using Pokr.Domain.HoldEm;
+using Pokr.Domain.PatternMatchers;
 
 namespace Pokr.Domain
 {
     public class PokerHandEvaluator
     {
-        private static Dictionary<Rank, IHandPatternMatcher> patternLookup =
+        private static readonly Dictionary<Rank, IHandPatternMatcher> PatternLookup =
             new Dictionary<Rank, IHandPatternMatcher>
                 {
-                    {Rank.Flush, new Flush()},
-                    {Rank.FourOfAKind, new FourOfAKind()},
-                    {Rank.FullHouse, new FullHouse()},
-                    {Rank.OnePair, new OnePair()},
-                    {Rank.Straight, new Straight()},
-                    {Rank.StraightFlush, new StraightFlush()},
-                    {Rank.ThreeOfAKind, new ThreeOfAKind()},
-                    {Rank.TwoPair, new TwoPair()},
-                    {Rank.HighCard, new HighCard()}
+                    {Rank.StraightFlush,    new StraightFlush()},
+                    {Rank.FourOfAKind,      new FourOfAKind()},
+                    {Rank.FullHouse,        new FullHouse()},
+                    {Rank.Flush,            new Flush()},
+                    {Rank.Straight,         new Straight()},
+                    {Rank.ThreeOfAKind,     new ThreeOfAKind()},
+                    {Rank.TwoPair,          new TwoPair()},
+                    {Rank.OnePair,          new OnePair()},
+                    {Rank.HighCard,         new HighCard()}
                 };
-
-        private static IList<Rank> rankDescending =
-            Enum.GetValues(typeof (Rank))
-                .Cast<Rank>()
-                .OrderByDescending(x => x)
-                .ToList();
 
         public PokerHandScore Evaluate(Hand hand)
         {
-            foreach (Rank rank in rankDescending)
+            foreach (Rank rank in PatternLookup.Keys.OrderByDescending( x => x))
             {
-                var match = patternLookup[rank].Match(hand);
+                var match = PatternLookup[rank].Match(hand);
                 if (match != null)
                 {
                     return new PokerHandScore(match, rank);
