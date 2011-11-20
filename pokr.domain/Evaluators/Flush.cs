@@ -3,7 +3,7 @@ using Pokr.Domain.HoldEm;
 
 namespace Pokr.Domain.Evaluators
 {
-    public class FlushEvaluator : IHandEvaluator
+    public class Flush : IHandEvaluator
     {
         public static PokerHandEvaluation FailedToMatch = new PokerHandEvaluation(false,null);
 

@@ -11,7 +11,7 @@ namespace Pokr.Tests.Unit
         [Test]
         public void ShouldDetectAFlush()
         {
-            PokerHandEvaluation result =  new FlushEvaluator().Evaluate(new Hand(new[]
+            PokerHandEvaluation result =  new Flush().Evaluate(new Hand(new[]
                                                                                 {
                                                                                     Picture.King.Of(Suit.Diamonds),
                                                                                     2.Of(Suit.Spades),
@@ -25,7 +25,7 @@ namespace Pokr.Tests.Unit
             Assert.That(result.Success, Is.True, "Should have detected the correct hand score from the original hand.");
             Assert.That(result.HighestCard, Is.EqualTo(9.Of(Suit.Spades)), "Should have picked the correct highest card");
 
-            result = new FlushEvaluator().Evaluate(new Hand(result.WinningCards));
+            result = new Flush().Evaluate(new Hand(result.WinningCards));
             
             Assert.That(result.Success, Is.True, "Should have detected the correct hand score from the winning subset of cards.");
             Assert.That(result.HighestCard, Is.EqualTo(9.Of(Suit.Spades)), "Should have picked the correct highest card");
@@ -34,7 +34,7 @@ namespace Pokr.Tests.Unit
         [Test]
         public void ShouldDetectTheHighestFlush()
         {
-            PokerHandEvaluation result = new FlushEvaluator().Evaluate(new Hand(new[]
+            PokerHandEvaluation result = new Flush().Evaluate(new Hand(new[]
                                                                                 {
                                                                                     Picture.Ace.Of(Suit.Spades),
                                                                                     2.Of(Suit.Spades),
@@ -48,7 +48,7 @@ namespace Pokr.Tests.Unit
             Assert.That(result.Success, Is.True, "Should have detected the correct hand score from the original hand.");
             Assert.That(result.HighestCard, Is.EqualTo(Picture.Ace.Of(Suit.Spades)), "Should have picked the correct highest card");
 
-            result = new FlushEvaluator().Evaluate(new Hand(result.WinningCards));
+            result = new Flush().Evaluate(new Hand(result.WinningCards));
 
             Assert.That(result.Success, Is.True, "Should have detected the correct hand score from the winning subset of cards.");
             Assert.That(result.HighestCard, Is.EqualTo(Picture.Ace.Of(Suit.Spades)), "Should have picked the correct highest card");
@@ -57,7 +57,7 @@ namespace Pokr.Tests.Unit
         [Test]
         public void ShouldRejectANonFlush()
         {
-            PokerHandEvaluation result = new FlushEvaluator().Evaluate(new Hand(new[]
+            PokerHandEvaluation result = new Flush().Evaluate(new Hand(new[]
                                                                                 {
                                                                                     Picture.King.Of(Suit.Diamonds),
                                                                                     2.Of(Suit.Spades),

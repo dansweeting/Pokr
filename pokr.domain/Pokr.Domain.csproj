@@ -43,11 +43,11 @@
     <Compile Include="Card.cs" />
     <Compile Include="CardExtensions.cs" />
     <Compile Include="Deck.cs" />
-    <Compile Include="Evaluators\FlushEvaluator.cs" />
-    <Compile Include="Evaluators\FourOfAKindEvaluator.cs" />
-    <Compile Include="Evaluators\FullHouseEvaluator.cs" />
+    <Compile Include="Evaluators\Flush.cs" />
+    <Compile Include="Evaluators\FourOfAKind.cs" />
+    <Compile Include="Evaluators\FullHouse.cs" />
     <Compile Include="Evaluators\NofAKind.cs" />
-    <Compile Include="Evaluators\StraightEvaluator.cs" />
+    <Compile Include="Evaluators\Straight.cs" />
     <Compile Include="HandScore.cs" />
     <Compile Include="HoldEm\Hand.cs" />
     <Compile Include="IHandEvaluator.cs" />

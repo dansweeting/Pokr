@@ -13,7 +13,7 @@ namespace Pokr.Tests.Unit
         [Test]
         public void ShouldMatchAFullHouse()
         {
-            PokerHandEvaluation result = new FullHouseEvaluator().Evaluate(new Hand(new[] {
+            PokerHandEvaluation result = new FullHouse().Evaluate(new Hand(new[] {
                                                                                              2.Of(Suit.Hearts),
                                                                                              2.Of(Suit.Spades),
                                                                                              2.Of(Suit.Clubs),
@@ -28,14 +28,14 @@ namespace Pokr.Tests.Unit
             Assert.That(result.WinningCards.Count(), Is.EqualTo(5),
                         "Should only have 5 cards in the winning cards collection.");
 
-            result = new FullHouseEvaluator().Evaluate(new Hand(result.WinningCards));
+            result = new FullHouse().Evaluate(new Hand(result.WinningCards));
             Assert.That(result.Success, Is.True, "Should have detected four of a kind in the winning subset of cards.");
         }
 
         [Test]
         public void ShouldMatchAFullHouseWithTheHighestPair()
         {
-            PokerHandEvaluation result = new FullHouseEvaluator().Evaluate(new Hand(new[] {
+            PokerHandEvaluation result = new FullHouse().Evaluate(new Hand(new[] {
                                                                                              2.Of(Suit.Hearts),
                                                                                              2.Of(Suit.Spades),
                                                                                              2.Of(Suit.Clubs),
@@ -50,7 +50,7 @@ namespace Pokr.Tests.Unit
             Assert.That(result.WinningCards.Count(), Is.EqualTo(5),
                         "Should only have 5 cards in the winning cards collection.");
 
-            result = new FullHouseEvaluator().Evaluate(new Hand(result.WinningCards));
+            result = new FullHouse().Evaluate(new Hand(result.WinningCards));
             Assert.That(result.Success, Is.True, "Should have detected four of a kind in the winning subset of cards.");
 
             Assert.That(result.HighestCard.Value, Is.EqualTo((int)Picture.Ace), "Should have picked the aces as the highest pair.");
@@ -59,7 +59,7 @@ namespace Pokr.Tests.Unit
         [Test]
         public void ShouldRejectANonFullHouse()
         {
-            PokerHandEvaluation result = new FullHouseEvaluator().Evaluate(new Hand(new[] {
+            PokerHandEvaluation result = new FullHouse().Evaluate(new Hand(new[] {
                                                                                              2.Of(Suit.Hearts),
                                                                                              2.Of(Suit.Spades),
                                                                                              2.Of(Suit.Clubs),

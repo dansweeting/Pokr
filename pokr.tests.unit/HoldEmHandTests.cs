@@ -37,7 +37,6 @@ namespace Pokr.Tests.Unit
 
             Assert.Throws<InvalidOperationException>(() => hand.Add(10.Of(Suit.Hearts)),
                                                      "Should not be possible to have more than 7 cards in a holdem hand.");
-
         }
     }
 }

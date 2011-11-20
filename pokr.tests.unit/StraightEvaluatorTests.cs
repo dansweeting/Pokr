@@ -11,7 +11,7 @@ namespace Pokr.Tests.Unit
         [Test]
         public void ShouldDetectAStraight()
         {
-            PokerHandEvaluation result =  new StraightEvaluator().Evaluate(new Hand(new[] {
+            PokerHandEvaluation result =  new Straight().Evaluate(new Hand(new[] {
                                                                                               2.Of(Suit.Spades),
                                                                                               3.Of(Suit.Hearts),
                                                                                               4.Of(Suit.Spades),
@@ -24,7 +24,7 @@ namespace Pokr.Tests.Unit
             Assert.That( result.Success , Is.True, "Should have correctly identified the hand.");
             Assert.That( result.HighestCard, Is.EqualTo(6.Of(Suit.Clubs)), "Should have correctly picked the highest card.");
 
-            result = new StraightEvaluator().Evaluate(new Hand(result.WinningCards));
+            result = new Straight().Evaluate(new Hand(result.WinningCards));
             Assert.That(result.Success, Is.True, "Should have correctly identified the hand from the winning subset.");
             
         }
@@ -32,7 +32,7 @@ namespace Pokr.Tests.Unit
         [Test]
         public void ShouldDetectTheHighestStraight()
         {
-            PokerHandEvaluation result = new StraightEvaluator().Evaluate(new Hand(new[] {
+            PokerHandEvaluation result = new Straight().Evaluate(new Hand(new[] {
                                                                                              3.Of(Suit.Hearts),
                                                                                              4.Of(Suit.Spades),
                                                                                              5.Of(Suit.Clubs),
@@ -45,14 +45,14 @@ namespace Pokr.Tests.Unit
             Assert.That(result.Success, Is.True, "Should have correctly identified the hand.");
             Assert.That(result.HighestCard, Is.EqualTo(9.Of(Suit.Hearts)), "Should have correctly picked the highest card.");
 
-            result = new StraightEvaluator().Evaluate(new Hand(result.WinningCards));
+            result = new Straight().Evaluate(new Hand(result.WinningCards));
             Assert.That(result.Success, Is.True, "Should have correctly identified the hand from the winning subset.");
         }
 
         [Test]
         public void ShouldRejectANonStraight()
         {
-            PokerHandEvaluation result = new StraightEvaluator().Evaluate(new Hand(new[] {
+            PokerHandEvaluation result = new Straight().Evaluate(new Hand(new[] {
                                                                                              2.Of(Suit.Hearts),
                                                                                              2.Of(Suit.Spades),
                                                                                              5.Of(Suit.Clubs),

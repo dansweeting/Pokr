@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Pokr.Domain.Evaluators
 {
-    public class StraightEvaluator : IHandEvaluator
+    public class Straight : IHandEvaluator
     {
         public PokerHandEvaluation Evaluate(Hand hand)
         {
@@ -43,7 +43,7 @@ namespace Pokr.Domain.Evaluators
                 return new PokerHandEvaluation(true, highestStraight);
             }
 
-            return FlushEvaluator.FailedToMatch;
+            return Flush.FailedToMatch;
         }
     }
 }

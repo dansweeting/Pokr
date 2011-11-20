@@ -6,7 +6,7 @@ using Pokr.Domain.HoldEm;
 
 namespace Pokr.Domain.Evaluators
 {
-    public class FullHouseEvaluator : IHandEvaluator
+    public class FullHouse : IHandEvaluator
     {
         public PokerHandEvaluation Evaluate(Hand hand)
         {

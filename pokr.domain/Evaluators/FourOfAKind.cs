@@ -4,7 +4,7 @@ using Pokr.Domain.HoldEm;
 
 namespace Pokr.Domain.Evaluators
 {
-    public class FourOfAKindEvaluator : IHandEvaluator
+    public class FourOfAKind : IHandEvaluator
     {
         public PokerHandEvaluation Evaluate(Hand hand)
         {

@@ -12,7 +12,7 @@ namespace Pokr.Tests.Unit
         [Test]
         public void ShouldDetectFourOfAKind()
         {
-            PokerHandEvaluation result = new FourOfAKindEvaluator().Evaluate(new Hand(new[] {
+            PokerHandEvaluation result = new FourOfAKind().Evaluate(new Hand(new[] {
                                                                                              2.Of(Suit.Hearts),
                                                                                              2.Of(Suit.Spades),
                                                                                              2.Of(Suit.Clubs),
@@ -27,7 +27,7 @@ namespace Pokr.Tests.Unit
             Assert.That(result.WinningCards.Count(), Is.EqualTo(5),
                         "Should only have 5 cards in the winning cards collection.");
 
-            result = new FourOfAKindEvaluator().Evaluate(new Hand(result.WinningCards));
+            result = new FourOfAKind().Evaluate(new Hand(result.WinningCards));
             Assert.That(result.Success, Is.True, "Should have detected four of a kind in the winning subset of cards.");
 
 
@@ -36,7 +36,7 @@ namespace Pokr.Tests.Unit
         [Test]
         public void ShouldDetectCorrectKicker()
         {
-            PokerHandEvaluation result = new FourOfAKindEvaluator().Evaluate(new Hand(new[] {
+            PokerHandEvaluation result = new FourOfAKind().Evaluate(new Hand(new[] {
                                                                                              10.Of(Suit.Hearts),
                                                                                              10.Of(Suit.Spades),
                                                                                              10.Of(Suit.Clubs),
@@ -49,7 +49,7 @@ namespace Pokr.Tests.Unit
             Assert.That(result.Success, Is.True, "Should have detected a full house");
             Assert.That(result.WinningCards.Contains(8.Of(Suit.Clubs)), Is.True, "Should have the correct kicker in the winning 5.");
 
-            result = new FourOfAKindEvaluator().Evaluate(new Hand(result.WinningCards));
+            result = new FourOfAKind().Evaluate(new Hand(result.WinningCards));
             Assert.That(result.Success, Is.True, "Should have detected four of a kind in the winning subset of cards.");
             Assert.That(result.WinningCards.Contains(8.Of(Suit.Clubs)), Is.True, "Should have the correct kicker in the winning 5.");
 
@@ -58,7 +58,7 @@ namespace Pokr.Tests.Unit
         [Test]
         public void ShouldRejectIfNotFourOfAKind()
         {
-            PokerHandEvaluation result = new FourOfAKindEvaluator().Evaluate(new Hand(new[] {
+            PokerHandEvaluation result = new FourOfAKind().Evaluate(new Hand(new[] {
                                                                                              2.Of(Suit.Hearts),
                                                                                              2.Of(Suit.Spades),
                                                                                              5.Of(Suit.Clubs),
