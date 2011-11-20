@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Builders\HandBuilder.cs" />
     <Compile Include="Domain\DeckTests.cs" />
     <Compile Include="Domain\PatternMatchers\FlushPatternTests.cs" />
     <Compile Include="Domain\PatternMatchers\FourOfAKindPatternTests.cs" />

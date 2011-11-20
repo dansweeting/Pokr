@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Pokr.Domain.HoldEm;
 
 namespace Pokr.Domain
@@ -23,10 +24,21 @@ namespace Pokr.Domain
 
             if (scoreX.Rank == scoreY.Rank)
             {
-                
+                var remainX = x.Cards.Except(scoreX.Cards).OrderByDescending(c => c.Value).ToArray();
+                var remainY = y.Cards.Except(scoreY.Cards).OrderByDescending(c => c.Value).ToArray();
+
+                for( int i = 0; i < remainX.Length; i++)
+                {
+                    if (remainX[i].Value == remainY[i].Value)
+                        continue;
+
+                    return remainX[i].Value - remainY[i].Value;
+                }
+
+                throw new NotImplementedException();
             }
 
-            return scoreX.Rank < scoreY.Rank ? -1 : 1;
+            return scoreX.Rank - scoreY.Rank;
         }
     }
 }
