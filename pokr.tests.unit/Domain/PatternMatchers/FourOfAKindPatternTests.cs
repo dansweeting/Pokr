@@ -5,10 +5,10 @@ using Pokr.Domain;
 using Pokr.Domain.Evaluators;
 using Pokr.Domain.HoldEm;
 
-namespace Pokr.Tests.Unit.Domain.HandEvaluators
+namespace Pokr.Tests.Unit.Domain.PatternMatchers
 {
     [TestFixture]
-    public class FourOfAKindEvaluatorTests
+    public class FourOfAKindPatternTests
     {
         [Test]
         public void ShouldDetectFourOfAKind()

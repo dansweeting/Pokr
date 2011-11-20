@@ -50,14 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\DeckTests.cs" />
-    <Compile Include="Domain\HandEvaluators\FlushEvaluatorTests.cs" />
-    <Compile Include="Domain\HandEvaluators\FourOfAKindEvaluatorTests.cs" />
-    <Compile Include="Domain\HandEvaluators\FullHouseEvaluatorTests.cs" />
-    <Compile Include="Domain\HandEvaluators\OnePairEvaluatorTests.cs" />
-    <Compile Include="Domain\HandEvaluators\PokerHandEvaluatorTests.cs" />
-    <Compile Include="Domain\HandEvaluators\StraightEvaluatorTests.cs" />
-    <Compile Include="Domain\HandEvaluators\ThreeOfAKindEvaluatorTests.cs" />
-    <Compile Include="Domain\HandEvaluators\TwoPairEvaluatorTests.cs" />
+    <Compile Include="Domain\PatternMatchers\FlushPatternTests.cs" />
+    <Compile Include="Domain\PatternMatchers\FourOfAKindPatternTests.cs" />
+    <Compile Include="Domain\PatternMatchers\FullHousePatternTests.cs" />
+    <Compile Include="Domain\PatternMatchers\OnePairPatternTests.cs" />
+    <Compile Include="Domain\PokerHandEvaluatorTests.cs" />
+    <Compile Include="Domain\PatternMatchers\StraightPatternTests.cs" />
+    <Compile Include="Domain\PatternMatchers\ThreeOfAKindPatternTests.cs" />
+    <Compile Include="Domain\PatternMatchers\TwoPairPatternTests.cs" />
     <Compile Include="Domain\HoldEmHandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

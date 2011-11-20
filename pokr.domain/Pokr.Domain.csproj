@@ -52,7 +52,9 @@
     <Compile Include="Evaluators\Straight.cs" />
     <Compile Include="Evaluators\ThreeOfAKind.cs" />
     <Compile Include="Evaluators\TwoPair.cs" />
-    <Compile Include="HandScore.cs" />
+    <Compile Include="PokerHandEvaluator.cs" />
+    <Compile Include="PokerHandScore.cs" />
+    <Compile Include="Rank.cs" />
     <Compile Include="HoldEm\Hand.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

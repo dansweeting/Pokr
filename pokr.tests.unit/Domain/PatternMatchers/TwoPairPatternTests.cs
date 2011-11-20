@@ -6,10 +6,10 @@ using Pokr.Domain;
 using Pokr.Domain.Evaluators;
 using Pokr.Domain.HoldEm;
 
-namespace Pokr.Tests.Unit.Domain.HandEvaluators
+namespace Pokr.Tests.Unit.Domain.PatternMatchers
 {
     [TestFixture]
-    public class TwoPairEvaluatorTests
+    public class TwoPairPatternTests
     {
         [Test]
         public void ShouldDetect()
