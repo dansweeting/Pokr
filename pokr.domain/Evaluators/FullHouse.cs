@@ -6,9 +6,9 @@ using Pokr.Domain.HoldEm;
 
 namespace Pokr.Domain.Evaluators
 {
-    public class FullHouse : IHandEvaluator
+    internal class FullHouse : IHandPatternMatcher
     {
-        public PokerHandEvaluation Evaluate(Hand hand)
+        public IEnumerable<Card> Match(Hand hand)
         {
             var nofAKind = new NofAKind();
             var threeOfAKind = nofAKind.Find(hand.Cards, 3);
@@ -28,14 +28,11 @@ namespace Pokr.Domain.Evaluators
                         restOfTheCards = restOfTheCards.Except(currentPair);
                     }   
                 }
-                if (highestPair != null)
-                {
-                    return new PokerHandEvaluation(true, threeOfAKind.Union(highestPair));
-                }
 
+                return highestPair != null ? threeOfAKind.Union(highestPair) : null;
             }
 
-            return new PokerHandEvaluation(false, null);
+            return null;
         }
     }
 }

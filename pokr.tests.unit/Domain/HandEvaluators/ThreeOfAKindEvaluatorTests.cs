@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Pokr.Domain;
@@ -12,7 +13,7 @@ namespace Pokr.Tests.Unit.Domain.HandEvaluators
         [Test]
         public void ShouldDetect()
         {
-            PokerHandEvaluation result = new ThreeOfAKind().Evaluate(new Hand(new[] {
+            IEnumerable<Card> result = new ThreeOfAKind().Match(new Hand(new[] {
                                                                                         Picture.Ace.Of(Suit.Spades),
                                                                                         Picture.Ace.Of(Suit.Hearts),
                                                                                         Picture.Ace.Of(Suit.Diamonds),
@@ -22,23 +23,34 @@ namespace Pokr.Tests.Unit.Domain.HandEvaluators
                                                                                         3.Of(Suit.Clubs)
                                                                                     }));
 
-            Assert.That(result.Success, Is.True, "Should have correctly identified the hand.");
-            Assert.That(result.HighestCard.Value, Is.EqualTo((int)Picture.Ace), "Should have correctly picked the highest card.");
 
-            Assert.That(result.WinningCards.Contains(Picture.King.Of(Suit.Spades)), Is.True,
-                        "Should have picked the two other highest cards.");
+            Assert.That(result.Count(), Is.EqualTo(3), "Should contain the 3 of a kind.");
+            Assert.That(result.All(x => x.Value == (int)Picture.Ace), Is.True, "Should have matched the aces.");
 
-            Assert.That(result.WinningCards.Contains(Picture.Jack.Of(Suit.Clubs)), Is.True,
-                        "Should have picked the two other highest cards.");
+        }
 
-            result = new ThreeOfAKind().Evaluate(new Hand(result.WinningCards));
-            Assert.That(result.Success, Is.True, "Should have correctly identified the hand from the winning subset.");
+        [Test]
+        public void ShouldDetectHighestThree()
+        {
+            IEnumerable<Card> result = new ThreeOfAKind().Match(new Hand(new[] {
+                                                                                        Picture.Queen.Of(Suit.Spades),
+                                                                                        Picture.Queen.Of(Suit.Hearts),
+                                                                                        Picture.Queen.Of(Suit.Diamonds),
+                                                                                        Picture.King.Of(Suit.Spades),
+                                                                                        Picture.King.Of(Suit.Clubs),
+                                                                                        Picture.King.Of(Suit.Hearts),
+                                                                                        3.Of(Suit.Clubs)
+                                                                                    }));
+
+            Assert.That(result.Count(), Is.EqualTo(3), "Should contain the 3 of a kind.");
+
+            Assert.That( result.All( x => x.Value == (int)Picture.King), Is.True, "Should have picked the higher triplet.");
         }
 
         [Test]
         public void ShouldReject()
         {
-            PokerHandEvaluation result = new ThreeOfAKind().Evaluate(new Hand(new[] {
+            IEnumerable<Card> result = new ThreeOfAKind().Match(new Hand(new[] {
                                                                                         Picture.Ace.Of(Suit.Spades),
                                                                                         Picture.Queen.Of(Suit.Hearts),
                                                                                         Picture.Ace.Of(Suit.Diamonds),
@@ -48,8 +60,7 @@ namespace Pokr.Tests.Unit.Domain.HandEvaluators
                                                                                         3.Of(Suit.Clubs)
                                                                                     }));
 
-            Assert.That(result.Success, Is.False, "Should have correctly identified the hand.");
-            Assert.That(result.WinningCards, Is.Null);
+            Assert.That(result, Is.Null, "Should not have matched anything.");
         }
     }
 }

@@ -4,11 +4,11 @@ using Pokr.Domain.HoldEm;
 
 namespace Pokr.Domain.Evaluators
 {
-    internal class FourOfAKind : IHandPatternMatcher
+    public class OnePair : IHandPatternMatcher
     {
         public IEnumerable<Card> Match(Hand hand)
         {
-            return new NofAKind().Find(hand.Cards, 4);
+            return new NofAKind().Find(hand.Cards, 2);
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Pokr.Domain.Evaluators
 {
-    public class Straight : IHandEvaluator
+    internal class Straight : IHandPatternMatcher
     {
-        public PokerHandEvaluation Evaluate(Hand hand)
+        public IEnumerable<Card> Match(Hand hand)
         {
             IList<Card> highestStraight = null;
             var cards = hand.Cards.ToArray();
@@ -40,10 +40,10 @@ namespace Pokr.Domain.Evaluators
 
             if (highestStraight != null && highestStraight.Count == 5)
             {
-                return new PokerHandEvaluation(true, highestStraight);
+                return highestStraight;
             }
 
-            return Flush.FailedToMatch;
+            return null;
         }
     }
 }

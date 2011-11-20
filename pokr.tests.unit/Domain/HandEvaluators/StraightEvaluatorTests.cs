@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Pokr.Domain;
 using Pokr.Domain.Evaluators;
@@ -11,48 +13,43 @@ namespace Pokr.Tests.Unit.Domain.HandEvaluators
         [Test]
         public void ShouldDetectAStraight()
         {
-            PokerHandEvaluation result =  new Straight().Evaluate(new Hand(new[] {
-                                                                                              2.Of(Suit.Spades),
-                                                                                              3.Of(Suit.Hearts),
-                                                                                              4.Of(Suit.Spades),
-                                                                                              5.Of(Suit.Spades),
-                                                                                              6.Of(Suit.Clubs),
-                                                                                              Picture.Ace.Of(Suit.Hearts),
-                                                                                              Picture.King.Of(Suit.Clubs)
-                                                                                          }));
+            var cards = new[] {
+                                  2.Of(Suit.Spades),
+                                  3.Of(Suit.Hearts),
+                                  4.Of(Suit.Spades),
+                                  5.Of(Suit.Spades),
+                                  6.Of(Suit.Clubs),
+                                  Picture.Ace.Of(Suit.Hearts),
+                                  Picture.King.Of(Suit.Clubs)
+                              };
 
-            Assert.That( result.Success , Is.True, "Should have correctly identified the hand.");
-            Assert.That( result.HighestCard, Is.EqualTo(6.Of(Suit.Clubs)), "Should have correctly picked the highest card.");
+            IEnumerable<Card> result =  new Straight().Match(new Hand(cards));
 
-            result = new Straight().Evaluate(new Hand(result.WinningCards));
-            Assert.That(result.Success, Is.True, "Should have correctly identified the hand from the winning subset.");
-            
+            Assert.That( result, Is.EquivalentTo(cards.OrderBy( x=> x.Value).Take(5)), "Should have matched the consecutive cards.");
         }
 
         [Test]
         public void ShouldDetectTheHighestStraight()
         {
-            PokerHandEvaluation result = new Straight().Evaluate(new Hand(new[] {
-                                                                                             3.Of(Suit.Hearts),
-                                                                                             4.Of(Suit.Spades),
-                                                                                             5.Of(Suit.Clubs),
-                                                                                             6.Of(Suit.Diamonds),
-                                                                                             7.Of(Suit.Spades),
-                                                                                             8.Of(Suit.Clubs),
-                                                                                             9.Of(Suit.Hearts)
-                                                                                         }));
+            var cards = new[] {
+                                  3.Of(Suit.Hearts),
+                                  4.Of(Suit.Spades),
+                                  5.Of(Suit.Clubs),
+                                  6.Of(Suit.Diamonds),
+                                  7.Of(Suit.Spades),
+                                  8.Of(Suit.Clubs),
+                                  9.Of(Suit.Hearts)
+                              };
 
-            Assert.That(result.Success, Is.True, "Should have correctly identified the hand.");
-            Assert.That(result.HighestCard, Is.EqualTo(9.Of(Suit.Hearts)), "Should have correctly picked the highest card.");
+            IEnumerable<Card> result = new Straight().Match(new Hand(cards));
 
-            result = new Straight().Evaluate(new Hand(result.WinningCards));
-            Assert.That(result.Success, Is.True, "Should have correctly identified the hand from the winning subset.");
+            Assert.That( result, Is.EquivalentTo(cards.OrderByDescending( x=>x.Value).Take(5)), "Should have matched the highest straight.");
         }
 
         [Test]
         public void ShouldRejectANonStraight()
         {
-            PokerHandEvaluation result = new Straight().Evaluate(new Hand(new[] {
+            IEnumerable<Card> result = new Straight().Match(new Hand(new[] {
                                                                                              2.Of(Suit.Hearts),
                                                                                              2.Of(Suit.Spades),
                                                                                              5.Of(Suit.Clubs),
@@ -62,8 +59,7 @@ namespace Pokr.Tests.Unit.Domain.HandEvaluators
                                                                                              10.Of(Suit.Hearts)
                                                                                          }));
 
-            Assert.That(result.Success, Is.False, "Should not have found a straight in this hand.");
-            Assert.That(result.WinningCards, Is.Null, "Should not have winning hands");
+            Assert.That(result, Is.Null, "Should not have matched anything.");
 
         }
     }

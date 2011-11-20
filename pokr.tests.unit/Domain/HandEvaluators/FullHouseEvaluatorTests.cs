@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Pokr.Domain;
@@ -12,7 +13,7 @@ namespace Pokr.Tests.Unit.Domain.HandEvaluators
         [Test]
         public void ShouldMatchAFullHouse()
         {
-            PokerHandEvaluation result = new FullHouse().Evaluate(new Hand(new[] {
+            IEnumerable<Card> result = new FullHouse().Match(new Hand(new[] {
                                                                                              2.Of(Suit.Hearts),
                                                                                              2.Of(Suit.Spades),
                                                                                              2.Of(Suit.Clubs),
@@ -22,43 +23,37 @@ namespace Pokr.Tests.Unit.Domain.HandEvaluators
                                                                                              10.Of(Suit.Hearts)
                                                                                          }));
 
-            Assert.That(result.Success, Is.True, "Should have detected a full house");
-
-            Assert.That(result.WinningCards.Count(), Is.EqualTo(5),
+            Assert.That(result.Count(), Is.EqualTo(5),
                         "Should only have 5 cards in the winning cards collection.");
 
-            result = new FullHouse().Evaluate(new Hand(result.WinningCards));
-            Assert.That(result.Success, Is.True, "Should have detected four of a kind in the winning subset of cards.");
+            result = new FullHouse().Match(new Hand(result));
+            Assert.That(result, Is.Not.Null, "Should have detected a match in the winning subset of cards.");
         }
 
         [Test]
         public void ShouldMatchAFullHouseWithTheHighestPair()
         {
-            PokerHandEvaluation result = new FullHouse().Evaluate(new Hand(new[] {
-                                                                                             2.Of(Suit.Hearts),
-                                                                                             2.Of(Suit.Spades),
-                                                                                             2.Of(Suit.Clubs),
-                                                                                             10.Of(Suit.Spades),
-                                                                                             10.Of(Suit.Hearts),
-                                                                                             Picture.Ace.Of(Suit.Diamonds),
-                                                                                             Picture.Ace.Of(Suit.Hearts)
-                                                                                         }));
+            var cards = new[] {
+                                  2.Of(Suit.Hearts),
+                                  2.Of(Suit.Spades),
+                                  10.Of(Suit.Clubs),
+                                  10.Of(Suit.Spades),
+                                  10.Of(Suit.Hearts),
+                                  Picture.Ace.Of(Suit.Diamonds),
+                                  Picture.Ace.Of(Suit.Hearts)
+                              };
 
-            Assert.That(result.Success, Is.True, "Should have detected a full house");
+            IEnumerable<Card> result = new FullHouse().Match(new Hand(cards));
 
-            Assert.That(result.WinningCards.Count(), Is.EqualTo(5),
-                        "Should only have 5 cards in the winning cards collection.");
-
-            result = new FullHouse().Evaluate(new Hand(result.WinningCards));
-            Assert.That(result.Success, Is.True, "Should have detected four of a kind in the winning subset of cards.");
-
-            Assert.That(result.HighestCard.Value, Is.EqualTo((int)Picture.Ace), "Should have picked the aces as the highest pair.");
+            Assert.That(result.Count(), Is.EqualTo(5), "Should have matched.");
+            Assert.That(result.Count(x => x.Value == (int)Picture.Ace), Is.EqualTo(2), "Should have matched the highest full house.");
+            Assert.That(result.Count(x => x.Value == 10), Is.EqualTo(3), "Should have matched the highest full house.");
         }
 
         [Test]
         public void ShouldRejectANonFullHouse()
         {
-            PokerHandEvaluation result = new FullHouse().Evaluate(new Hand(new[] {
+            IEnumerable<Card> result = new FullHouse().Match(new Hand(new[] {
                                                                                              2.Of(Suit.Hearts),
                                                                                              2.Of(Suit.Spades),
                                                                                              2.Of(Suit.Clubs),
@@ -68,9 +63,7 @@ namespace Pokr.Tests.Unit.Domain.HandEvaluators
                                                                                              10.Of(Suit.Hearts)
                                                                                          }));
 
-            Assert.That(result.Success, Is.False, "Should not have detected a full house");
-
-            Assert.That(result.WinningCards, Is.Null, "Should not have any winning cards");
+            Assert.That(result, Is.Null, "Should not have detected a full house");
         }
     }
 }

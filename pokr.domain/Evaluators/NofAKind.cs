@@ -4,7 +4,7 @@ using Pokr.Domain.HoldEm;
 
 namespace Pokr.Domain.Evaluators
 {
-    public class NofAKind
+    internal class NofAKind
     {
         public IEnumerable<Card> Find(IEnumerable<Card> cards, int n)
         {

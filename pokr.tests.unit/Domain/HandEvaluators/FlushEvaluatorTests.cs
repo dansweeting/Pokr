@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Pokr.Domain;
 using Pokr.Domain.Evaluators;
@@ -11,7 +13,7 @@ namespace Pokr.Tests.Unit.Domain.HandEvaluators
         [Test]
         public void ShouldDetectAFlush()
         {
-            PokerHandEvaluation result =  new Flush().Evaluate(new Hand(new[]
+            IEnumerable<Card> result =  new Flush().Match(new Hand(new[]
                                                                                 {
                                                                                     Picture.King.Of(Suit.Diamonds),
                                                                                     2.Of(Suit.Spades),
@@ -22,42 +24,37 @@ namespace Pokr.Tests.Unit.Domain.HandEvaluators
                                                                                     10.Of(Suit.Clubs)
                                                                                 }));
 
-            Assert.That(result.Success, Is.True, "Should have detected the correct hand score from the original hand.");
-            Assert.That(result.HighestCard, Is.EqualTo(9.Of(Suit.Spades)), "Should have picked the correct highest card");
-
-            result = new Flush().Evaluate(new Hand(result.WinningCards));
-            
-            Assert.That(result.Success, Is.True, "Should have detected the correct hand score from the winning subset of cards.");
-            Assert.That(result.HighestCard, Is.EqualTo(9.Of(Suit.Spades)), "Should have picked the correct highest card");
+            Assert.That(result.Count(), Is.EqualTo(5));
+            Assert.That(result.All( x => x.Suit == Suit.Spades), Is.True, "Should contain the flush only.");
         }
 
         [Test]
         public void ShouldDetectTheHighestFlush()
         {
-            PokerHandEvaluation result = new Flush().Evaluate(new Hand(new[]
-                                                                                {
-                                                                                    Picture.Ace.Of(Suit.Spades),
-                                                                                    2.Of(Suit.Spades),
-                                                                                    3.Of(Suit.Spades),
-                                                                                    5.Of(Suit.Spades),
-                                                                                    7.Of(Suit.Spades),
-                                                                                    9.Of(Suit.Spades),
-                                                                                    10.Of(Suit.Spades)
-                                                                                }));
+            var cards = new[]
+                            {
+                                Picture.Ace.Of(Suit.Spades),
+                                2.Of(Suit.Spades),
+                                3.Of(Suit.Spades),
+                                5.Of(Suit.Spades),
+                                7.Of(Suit.Spades),
+                                9.Of(Suit.Spades),
+                                10.Of(Suit.Spades)
+                            };
 
-            Assert.That(result.Success, Is.True, "Should have detected the correct hand score from the original hand.");
-            Assert.That(result.HighestCard, Is.EqualTo(Picture.Ace.Of(Suit.Spades)), "Should have picked the correct highest card");
+            IEnumerable<Card> result = new Flush().Match(new Hand(cards));
 
-            result = new Flush().Evaluate(new Hand(result.WinningCards));
+            Assert.That(result.Count(), Is.EqualTo(5));
+            Assert.That(result.All(x => x.Suit == Suit.Spades), Is.True, "Should contain the flush only.");
 
-            Assert.That(result.Success, Is.True, "Should have detected the correct hand score from the winning subset of cards.");
-            Assert.That(result.HighestCard, Is.EqualTo(Picture.Ace.Of(Suit.Spades)), "Should have picked the correct highest card");
+            Assert.That(result, Is.EquivalentTo(cards.OrderByDescending(x => x.Value).Take(5)), 
+                "Should have picked the highest spade cards.");
         }
 
         [Test]
         public void ShouldRejectANonFlush()
         {
-            PokerHandEvaluation result = new Flush().Evaluate(new Hand(new[]
+            IEnumerable<Card> result = new Flush().Match(new Hand(new[]
                                                                                 {
                                                                                     Picture.King.Of(Suit.Diamonds),
                                                                                     2.Of(Suit.Spades),
@@ -68,8 +65,7 @@ namespace Pokr.Tests.Unit.Domain.HandEvaluators
                                                                                     10.Of(Suit.Clubs)
                                                                                 }));
 
-            Assert.That(result.Success, Is.EqualTo( false),"Should not have detected a straight flush in this hand.");
-            Assert.That(result.WinningCards, Is.Null, "Should not have winning cards since the flush was not detected.");
+            Assert.That(result, Is.Null, "Should not have matching cards since the flush was not detected.");
 
         }
         

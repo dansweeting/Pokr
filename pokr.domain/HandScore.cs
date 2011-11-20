@@ -4,5 +4,9 @@ namespace Pokr.Domain
     {
         HighCard,
         StraightFlush,
+        FullHouse,
+        FourOfAKind,
+        ThreeOfAKind,
+        Flush
     }
 }

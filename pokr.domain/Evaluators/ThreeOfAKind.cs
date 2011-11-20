@@ -1,27 +1,25 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Pokr.Domain.HoldEm;
 
 namespace Pokr.Domain.Evaluators
 {
-    public class ThreeOfAKind : IHandEvaluator
+    internal class ThreeOfAKind : IHandPatternMatcher
     {
-        public PokerHandEvaluation Evaluate(Hand hand)
+        public IEnumerable<Card> Match(Hand hand)
         {
             var nofAKind = new NofAKind();
 
             var three = nofAKind.Find(hand.Cards, 3);
             if (three != null)
             {
-                var next2HighestCards = hand.Cards
-                    .Except(three)
-                    .OrderByDescending(x => x.Value)
-                    .Take(2);
+                var nextThree = nofAKind.Find(hand.Cards.Except(three), 3);
 
-                return new PokerHandEvaluation(true, three.Union(next2HighestCards));
+                return nextThree ?? three;
             }
 
-            return new PokerHandEvaluation(false, null);
+            return null;
         }
     }
 }
