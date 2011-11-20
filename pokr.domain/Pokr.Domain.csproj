@@ -49,6 +49,8 @@
     <Compile Include="Evaluators\IHandEvaluator.cs" />
     <Compile Include="Evaluators\NofAKind.cs" />
     <Compile Include="Evaluators\Straight.cs" />
+    <Compile Include="Evaluators\ThreeOfAKind.cs" />
+    <Compile Include="Evaluators\TwoPair.cs" />
     <Compile Include="HandScore.cs" />
     <Compile Include="HoldEm\Hand.cs" />
     <Compile Include="Picture.cs" />

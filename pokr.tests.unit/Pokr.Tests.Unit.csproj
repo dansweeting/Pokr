@@ -53,7 +53,10 @@
     <Compile Include="Domain\HandEvaluators\FlushEvaluatorTests.cs" />
     <Compile Include="Domain\HandEvaluators\FourOfAKindEvaluatorTests.cs" />
     <Compile Include="Domain\HandEvaluators\FullHouseEvaluatorTests.cs" />
+    <Compile Include="Domain\HandEvaluators\PairEvaluatorTests.cs" />
     <Compile Include="Domain\HandEvaluators\StraightEvaluatorTests.cs" />
+    <Compile Include="Domain\HandEvaluators\ThreeOfAKindEvaluatorTests.cs" />
+    <Compile Include="Domain\HandEvaluators\TwoPairEvaluatorTests.cs" />
     <Compile Include="Domain\HoldEmHandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
