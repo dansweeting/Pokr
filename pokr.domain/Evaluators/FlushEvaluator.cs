@@ -9,7 +9,7 @@ namespace Pokr.Domain.Evaluators
 
         public PokerHandEvaluation Evaluate(Hand hand)
         {
-            var groupings = hand.Cards.GroupBy(x => x.Suit).Where( k => k.Count() >= 5);
+            var groupings = hand.Cards.GroupBy(x => x.Suit).Where( k => k.Count() >= 5).ToList();
 
             if (groupings.Any())
             {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Pokr.Domain.HoldEm;
 using System.Linq;
@@ -9,61 +8,42 @@ namespace Pokr.Domain.Evaluators
     {
         public PokerHandEvaluation Evaluate(Hand hand)
         {
-            var cards = (from c in hand.Cards
-                        orderby c.Value descending 
-                        select c).ToArray();
+            IList<Card> highestStraight = null;
+            var cards = hand.Cards.ToArray();
 
-            IList<Card> highestRun = null;
-            int highestCard = 0;
-
-            foreach (Card card in cards)
+            for (int i = 0; i < hand.Cards.Count; i++)
             {
-                IList<Card> neighbours = FindNeigbours(card, cards).ToList();
+                var currentStraight = new List<Card> {cards[i]};
 
-                int highCard = neighbours.Max(x => x.Value);
-                if ( highCard > highestCard || 
-                    ( highestRun != null && neighbours.Count > highestRun.Count))
+                for (int k = 1; k < 5; k++)
                 {
-                    highestCard = highCard;
-                    highestRun = neighbours;
+                    int increment = k;
+                    var next = cards.Where(x => x.Value == currentStraight[0].Value + increment);
+                    if (!next.Any())
+                    {
+                        break;
+                    }
+                    currentStraight.Add(next.First());
+                }
+
+                if (currentStraight.Count == 5)
+                {
+                    var maxCardValue = currentStraight.Max(x => x.Value);
+
+                    if (highestStraight == null ||
+                        maxCardValue > highestStraight.Max(x => x.Value))
+                    {
+                        highestStraight = currentStraight;
+                    }
                 }
             }
 
-            if ( highestRun != null && highestRun.Count >= 5)
+            if (highestStraight != null && highestStraight.Count == 5)
             {
-                var highestFive = (from card in highestRun
-                                   orderby card.Value descending
-                                   select card).Take(5);
-
-                return new PokerHandEvaluation(true, highestFive);
+                return new PokerHandEvaluation(true, highestStraight);
             }
 
             return FlushEvaluator.FailedToMatch;
-        }
-
-        private IEnumerable<Card> FindNeigbours(Card card, IEnumerable<Card> cards )
-        {
-            var neighbours = from c in cards
-                             let diff = c.Value - card.Value
-                             where diff >= 0 && diff < 5
-                             select c;
-
-            neighbours = RemoveDuplicateValues(neighbours);
-
-            return neighbours;
-        }
-
-        private IEnumerable<Card> RemoveDuplicateValues(IEnumerable<Card> item)
-        {
-            var cardValues = new HashSet<int>();
-            foreach (var neighbour in item)
-            {
-                if (!cardValues.Contains(neighbour.Value))
-                {
-                    cardValues.Add(neighbour.Value);
-                    yield return neighbour;
-                }
-            }
         }
     }
 }
