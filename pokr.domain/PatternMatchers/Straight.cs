@@ -18,7 +18,7 @@ namespace Pokr.Domain.PatternMatchers
                 for (int k = 1; k < 5; k++)
                 {
                     int increment = k;
-                    var next = cards.Where(x => x.Value == currentStraight[0].Value + increment);
+                    var next = cards.Where(x => x.Rank == currentStraight[0].Rank + increment);
                     if (!next.Any())
                     {
                         break;
@@ -28,10 +28,10 @@ namespace Pokr.Domain.PatternMatchers
 
                 if (currentStraight.Count == 5)
                 {
-                    var maxCardValue = currentStraight.Max(x => x.Value);
+                    var maxCardValue = currentStraight.Max(x => x.Rank);
 
                     if (highestStraight == null ||
-                        maxCardValue > highestStraight.Max(x => x.Value))
+                        maxCardValue > highestStraight.Max(x => x.Rank))
                     {
                         highestStraight = currentStraight;
                     }

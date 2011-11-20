@@ -8,17 +8,17 @@ namespace Pokr.Domain.PatternMatchers
         public IEnumerable<Card> Find(IEnumerable<Card> cards, int n)
         {
             var groupsOfN = 
-                cards.GroupBy(x => x.Value)
+                cards.GroupBy(x => x.Rank)
                     .Where(k => k.Count() == n)
                     .ToList();
 
             if (groupsOfN.Any())
             {
                 int cardValue = (from match in groupsOfN.First()
-                                 select match.Value).First();
+                                 select match.Rank).First();
 
                 return from card in cards
-                       where card.Value == cardValue
+                       where card.Rank == cardValue
                        select card;
             }
 

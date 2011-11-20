@@ -24,15 +24,15 @@ namespace Pokr.Domain
 
             if (scoreX.Rank == scoreY.Rank)
             {
-                var remainX = x.Cards.Except(scoreX.Cards).OrderByDescending(c => c.Value).ToArray();
-                var remainY = y.Cards.Except(scoreY.Cards).OrderByDescending(c => c.Value).ToArray();
+                var remainX = x.Cards.Except(scoreX.Cards).OrderByDescending(c => c.Rank).ToArray();
+                var remainY = y.Cards.Except(scoreY.Cards).OrderByDescending(c => c.Rank).ToArray();
 
                 for( int i = 0; i < remainX.Length; i++)
                 {
-                    if (remainX[i].Value == remainY[i].Value)
+                    if (remainX[i].Rank == remainY[i].Rank)
                         continue;
 
-                    return remainX[i].Value - remainY[i].Value;
+                    return remainX[i].Rank - remainY[i].Rank;
                 }
 
                 throw new NotImplementedException();

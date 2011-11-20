@@ -25,7 +25,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
 
             IEnumerable<Card> result =  new Straight().Match(new Hand(cards));
 
-            Assert.That( result, Is.EquivalentTo(cards.OrderBy( x=> x.Value).Take(5)), "Should have matched the consecutive cards.");
+            Assert.That( result, Is.EquivalentTo(cards.OrderBy( x=> x.Rank).Take(5)), "Should have matched the consecutive cards.");
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
 
             IEnumerable<Card> result = new Straight().Match(new Hand(cards));
 
-            Assert.That( result, Is.EquivalentTo(cards.OrderByDescending( x=>x.Value).Take(5)), "Should have matched the highest straight.");
+            Assert.That( result, Is.EquivalentTo(cards.OrderByDescending( x=>x.Rank).Take(5)), "Should have matched the highest straight.");
         }
 
         [Test]

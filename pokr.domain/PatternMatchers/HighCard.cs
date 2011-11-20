@@ -8,7 +8,7 @@ namespace Pokr.Domain.PatternMatchers
     {
         public IEnumerable<Card> Match(Hand hand)
         {
-            return hand.Cards.OrderByDescending(x => x.Value).Take(1);
+            return hand.Cards.OrderByDescending(x => x.Rank).Take(1);
         }
     }
 }

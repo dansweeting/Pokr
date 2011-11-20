@@ -60,7 +60,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
 
             IEnumerable<Card> result = new StraightFlush().Match(new Hand(cards));
 
-            Assert.That( result, Is.EquivalentTo( cards.OrderByDescending( x => x.Value).Take(5)), 
+            Assert.That( result, Is.EquivalentTo( cards.OrderByDescending( x => x.Rank).Take(5)), 
                 "Should have matched the highest straight flush.");
         }
 

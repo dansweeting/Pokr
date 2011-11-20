@@ -46,8 +46,8 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
             IEnumerable<Card> result = new FullHouse().Match(new Hand(cards));
 
             Assert.That(result.Count(), Is.EqualTo(5), "Should have matched.");
-            Assert.That(result.Count(x => x.Value == (int)Picture.Ace), Is.EqualTo(2), "Should have matched the highest full house.");
-            Assert.That(result.Count(x => x.Value == 10), Is.EqualTo(3), "Should have matched the highest full house.");
+            Assert.That(result.Count(x => x.Rank == (int)Picture.Ace), Is.EqualTo(2), "Should have matched the highest full house.");
+            Assert.That(result.Count(x => x.Rank == 10), Is.EqualTo(3), "Should have matched the highest full house.");
         }
 
         [Test]

@@ -26,7 +26,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
             Assert.That(result.Count(), Is.EqualTo(4),
                         "Should only have 4 cards in the winning cards collection.");
 
-            Assert.That(result.All( x => x.Value == 2), Is.True, "Should have matched the 2's");
+            Assert.That(result.All( x => x.Rank == 2), Is.True, "Should have matched the 2's");
 
         }
 

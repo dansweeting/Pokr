@@ -25,7 +25,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
 
 
             Assert.That(result.Count(), Is.EqualTo(3), "Should contain the 3 of a kind.");
-            Assert.That(result.All(x => x.Value == (int)Picture.Ace), Is.True, "Should have matched the aces.");
+            Assert.That(result.All(x => x.Rank == (int)Picture.Ace), Is.True, "Should have matched the aces.");
 
         }
 
@@ -44,7 +44,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
 
             Assert.That(result.Count(), Is.EqualTo(3), "Should contain the 3 of a kind.");
 
-            Assert.That( result.All( x => x.Value == (int)Picture.King), Is.True, "Should have picked the higher triplet.");
+            Assert.That( result.All( x => x.Rank == (int)Picture.King), Is.True, "Should have picked the higher triplet.");
         }
 
         [Test]

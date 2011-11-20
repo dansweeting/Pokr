@@ -26,7 +26,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
 
             Assert.That(result.Count(), Is.EqualTo(2), "Should have found a match");
 
-            Assert.That(result.All(x => x.Value == 8));
+            Assert.That(result.All(x => x.Rank == 8));
         }
 
         [Test]

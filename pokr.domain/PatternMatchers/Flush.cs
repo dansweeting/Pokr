@@ -14,7 +14,7 @@ namespace Pokr.Domain.PatternMatchers
             {
                 return (from card in hand.Cards
                         where card.Suit == groupings.First().Key
-                        orderby card.Value descending
+                        orderby card.Rank descending
                         select card).Take(5);
             }
 

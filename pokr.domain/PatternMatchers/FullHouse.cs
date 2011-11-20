@@ -20,7 +20,7 @@ namespace Pokr.Domain.PatternMatchers
                 while ((currentPair = nofAKind.Find(restOfTheCards, 2)) != null)
                 {
                     if (highestPair == null 
-                        || currentPair.First().Value > highestPair.First().Value)
+                        || currentPair.First().Rank > highestPair.First().Rank)
                     {
                         highestPair = currentPair;
                         restOfTheCards = restOfTheCards.Except(currentPair);

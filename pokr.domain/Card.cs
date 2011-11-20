@@ -3,17 +3,17 @@ namespace Pokr.Domain
     public struct Card
     {
         private readonly Suit _suit;
-        private readonly int _value;
+        private readonly int _rank;
 
-        public Card(Suit suit, int value)
+        public Card(Suit suit, int rank)
         {
             _suit = suit;
-            _value = value;
+            _rank = rank;
         }
 
-        public int Value
+        public int Rank
         {
-            get { return _value; }
+            get { return _rank; }
         }
 
         public Suit Suit
@@ -23,12 +23,12 @@ namespace Pokr.Domain
 
         public override string ToString()
         {
-            if (Value == 1 || Value > 10)
+            if (Rank == 1 || Rank > 10)
             {
-                var value = ((Picture) Value).ToString();
+                var value = ((Picture) Rank).ToString();
                 return string.Format("{0} of {1}", value, Suit);
             }
-            return string.Format("{0} of {1}", Value, Suit);
+            return string.Format("{0} of {1}", Rank, Suit);
         }
     }
 }

@@ -47,7 +47,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
             Assert.That(result.Count(), Is.EqualTo(5));
             Assert.That(result.All(x => x.Suit == Suit.Spades), Is.True, "Should contain the flush only.");
 
-            Assert.That(result, Is.EquivalentTo(cards.OrderByDescending(x => x.Value).Take(5)), 
+            Assert.That(result, Is.EquivalentTo(cards.OrderByDescending(x => x.Rank).Take(5)), 
                 "Should have picked the highest spade cards.");
         }
 

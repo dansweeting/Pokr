@@ -65,11 +65,11 @@ namespace Pokr.Tests.Unit.Domain
 
             Mocked<IPokerHandEvaluator>()
                 .Setup(x => x.Evaluate(losingHand))
-                .Returns(new PokerHandScore(losingHand.Cards.Where(x => x.Value == 5), Rank.OnePair));
+                .Returns(new PokerHandScore(losingHand.Cards.Where(x => x.Rank == 5), Rank.OnePair));
 
             Mocked<IPokerHandEvaluator>()
                 .Setup(x => x.Evaluate(winningHand))
-                .Returns(new PokerHandScore(winningHand.Cards.Where(x => x.Value == 5), Rank.OnePair));
+                .Returns(new PokerHandScore(winningHand.Cards.Where(x => x.Rank == 5), Rank.OnePair));
 
             Assert.That(Subject.Compare(losingHand, winningHand), Is.EqualTo(-1));
             Assert.That(Subject.Compare(winningHand, losingHand), Is.EqualTo(1));
