@@ -54,6 +54,7 @@
     <Compile Include="Domain\PatternMatchers\FourOfAKindPatternTests.cs" />
     <Compile Include="Domain\PatternMatchers\FullHousePatternTests.cs" />
     <Compile Include="Domain\PatternMatchers\OnePairPatternTests.cs" />
+    <Compile Include="Domain\PatternMatchers\StraightFlushPatternTests.cs" />
     <Compile Include="Domain\PokerHandEvaluatorTests.cs" />
     <Compile Include="Domain\PatternMatchers\StraightPatternTests.cs" />
     <Compile Include="Domain\PatternMatchers\ThreeOfAKindPatternTests.cs" />

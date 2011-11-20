@@ -46,10 +46,12 @@
     <Compile Include="Evaluators\Flush.cs" />
     <Compile Include="Evaluators\FourOfAKind.cs" />
     <Compile Include="Evaluators\FullHouse.cs" />
+    <Compile Include="Evaluators\HighCard.cs" />
     <Compile Include="Evaluators\IHandPatternMatcher.cs" />
     <Compile Include="Evaluators\NofAKind.cs" />
     <Compile Include="Evaluators\OnePair.cs" />
     <Compile Include="Evaluators\Straight.cs" />
+    <Compile Include="Evaluators\StraightFlush.cs" />
     <Compile Include="Evaluators\ThreeOfAKind.cs" />
     <Compile Include="Evaluators\TwoPair.cs" />
     <Compile Include="PokerHandEvaluator.cs" />

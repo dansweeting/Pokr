@@ -16,16 +16,16 @@ namespace Pokr.Domain
                     {Rank.FullHouse, new FullHouse()},
                     {Rank.OnePair, new OnePair()},
                     {Rank.Straight, new Straight()},
-                    //{Rank.StraightFlush, null},
+                    {Rank.StraightFlush, new StraightFlush()},
                     {Rank.ThreeOfAKind, new ThreeOfAKind()},
-                    {Rank.TwoPair, new TwoPair()}
+                    {Rank.TwoPair, new TwoPair()},
+                    {Rank.HighCard, new HighCard()}
                 };
 
         private static IList<Rank> rankDescending =
             Enum.GetValues(typeof (Rank))
                 .Cast<Rank>()
                 .OrderByDescending(x => x)
-                .Except( new [] {Rank.HighCard, Rank.StraightFlush})
                 .ToList();
 
         public PokerHandScore Evaluate(Hand hand)
@@ -33,14 +33,12 @@ namespace Pokr.Domain
             foreach (Rank rank in rankDescending)
             {
                 var match = patternLookup[rank].Match(hand);
-                
                 if (match != null)
                 {
                     return new PokerHandScore(match, rank);
                 }
             }
-
-            return new PokerHandScore( hand.Cards.OrderByDescending( x => x.Value).Take(1), Rank.HighCard );
+            throw new InvalidOperationException("No hand was matched!");
         }
     }
 }
