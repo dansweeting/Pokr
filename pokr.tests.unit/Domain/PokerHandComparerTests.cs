@@ -86,5 +86,11 @@ namespace Pokr.Tests.Unit.Domain
         {
             throw new NotImplementedException();
         }
+
+        [Test]
+        public void ShouldHandleTwoPairComparisons()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

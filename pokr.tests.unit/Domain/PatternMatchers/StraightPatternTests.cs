@@ -23,7 +23,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
                                   Picture.King.Of(Suit.Clubs)
                               };
 
-            IEnumerable<Card> result =  new Straight().Match(new Hand(cards));
+            IEnumerable<Card> result =  new Straight().Match(cards);
 
             Assert.That( result, Is.EquivalentTo(cards.OrderBy( x=> x.Rank).Take(5)), "Should have matched the consecutive cards.");
         }
@@ -41,7 +41,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
                                   9.Of(Suit.Hearts)
                               };
 
-            IEnumerable<Card> result = new Straight().Match(new Hand(cards));
+            IEnumerable<Card> result = new Straight().Match(cards);
 
             Assert.That( result, Is.EquivalentTo(cards.OrderByDescending( x=>x.Rank).Take(5)), "Should have matched the highest straight.");
         }
@@ -49,15 +49,15 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
         [Test]
         public void ShouldRejectANonStraight()
         {
-            IEnumerable<Card> result = new Straight().Match(new Hand(new[] {
-                                                                                             2.Of(Suit.Hearts),
-                                                                                             2.Of(Suit.Spades),
-                                                                                             5.Of(Suit.Clubs),
-                                                                                             6.Of(Suit.Diamonds),
-                                                                                             8.Of(Suit.Clubs),
-                                                                                             9.Of(Suit.Hearts),
-                                                                                             10.Of(Suit.Hearts)
-                                                                                         }));
+            IEnumerable<Card> result = new Straight().Match(new[] {
+                                                                2.Of(Suit.Hearts),
+                                                                2.Of(Suit.Spades),
+                                                                5.Of(Suit.Clubs),
+                                                                6.Of(Suit.Diamonds),
+                                                                8.Of(Suit.Clubs),
+                                                                9.Of(Suit.Hearts),
+                                                                10.Of(Suit.Hearts)
+                                                            });
 
             Assert.That(result, Is.Null, "Should not have matched anything.");
 

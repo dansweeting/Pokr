@@ -13,15 +13,15 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
         [Test]
         public void ShouldDetect()
         {
-            IEnumerable<Card> result = new ThreeOfAKind().Match(new Hand(new[] {
-                                                                                        Picture.Ace.Of(Suit.Spades),
-                                                                                        Picture.Ace.Of(Suit.Hearts),
-                                                                                        Picture.Ace.Of(Suit.Diamonds),
-                                                                                        Picture.King.Of(Suit.Spades),
-                                                                                        Picture.Jack.Of(Suit.Clubs),
-                                                                                        2.Of(Suit.Hearts),
-                                                                                        3.Of(Suit.Clubs)
-                                                                                    }));
+            IEnumerable<Card> result = new ThreeOfAKind().Match(new[] {
+                                                                        Picture.Ace.Of(Suit.Spades),
+                                                                        Picture.Ace.Of(Suit.Hearts),
+                                                                        Picture.Ace.Of(Suit.Diamonds),
+                                                                        Picture.King.Of(Suit.Spades),
+                                                                        Picture.Jack.Of(Suit.Clubs),
+                                                                        2.Of(Suit.Hearts),
+                                                                        3.Of(Suit.Clubs)
+                                                                    });
 
 
             Assert.That(result.Count(), Is.EqualTo(3), "Should contain the 3 of a kind.");
@@ -32,15 +32,15 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
         [Test]
         public void ShouldDetectHighestThree()
         {
-            IEnumerable<Card> result = new ThreeOfAKind().Match(new Hand(new[] {
-                                                                                        Picture.Queen.Of(Suit.Spades),
-                                                                                        Picture.Queen.Of(Suit.Hearts),
-                                                                                        Picture.Queen.Of(Suit.Diamonds),
-                                                                                        Picture.King.Of(Suit.Spades),
-                                                                                        Picture.King.Of(Suit.Clubs),
-                                                                                        Picture.King.Of(Suit.Hearts),
-                                                                                        3.Of(Suit.Clubs)
-                                                                                    }));
+            IEnumerable<Card> result = new ThreeOfAKind().Match(new[] {
+                                                                        Picture.Queen.Of(Suit.Spades),
+                                                                        Picture.Queen.Of(Suit.Hearts),
+                                                                        Picture.Queen.Of(Suit.Diamonds),
+                                                                        Picture.King.Of(Suit.Spades),
+                                                                        Picture.King.Of(Suit.Clubs),
+                                                                        Picture.King.Of(Suit.Hearts),
+                                                                        3.Of(Suit.Clubs)
+                                                                    });
 
             Assert.That(result.Count(), Is.EqualTo(3), "Should contain the 3 of a kind.");
 
@@ -50,15 +50,15 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
         [Test]
         public void ShouldReject()
         {
-            IEnumerable<Card> result = new ThreeOfAKind().Match(new Hand(new[] {
-                                                                                        Picture.Ace.Of(Suit.Spades),
-                                                                                        Picture.Queen.Of(Suit.Hearts),
-                                                                                        Picture.Ace.Of(Suit.Diamonds),
-                                                                                        Picture.King.Of(Suit.Spades),
-                                                                                        Picture.Jack.Of(Suit.Clubs),
-                                                                                        2.Of(Suit.Hearts),
-                                                                                        3.Of(Suit.Clubs)
-                                                                                    }));
+            IEnumerable<Card> result = new ThreeOfAKind().Match(new[] {
+                                                                        Picture.Ace.Of(Suit.Spades),
+                                                                        Picture.Queen.Of(Suit.Hearts),
+                                                                        Picture.Ace.Of(Suit.Diamonds),
+                                                                        Picture.King.Of(Suit.Spades),
+                                                                        Picture.Jack.Of(Suit.Clubs),
+                                                                        2.Of(Suit.Hearts),
+                                                                        3.Of(Suit.Clubs)
+                                                                    });
 
             Assert.That(result, Is.Null, "Should not have matched anything.");
         }

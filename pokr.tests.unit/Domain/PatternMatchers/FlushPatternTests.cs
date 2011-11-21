@@ -13,16 +13,16 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
         [Test]
         public void ShouldDetectAFlush()
         {
-            IEnumerable<Card> result =  new Flush().Match(new Hand(new[]
-                                                                                {
-                                                                                    Picture.King.Of(Suit.Diamonds),
-                                                                                    2.Of(Suit.Spades),
-                                                                                    3.Of(Suit.Spades),
-                                                                                    5.Of(Suit.Spades),
-                                                                                    7.Of(Suit.Spades),
-                                                                                    9.Of(Suit.Spades),
-                                                                                    10.Of(Suit.Clubs)
-                                                                                }));
+            IEnumerable<Card> result =  new Flush().Match(new[]
+                                                            {
+                                                                Picture.King.Of(Suit.Diamonds),
+                                                                2.Of(Suit.Spades),
+                                                                3.Of(Suit.Spades),
+                                                                5.Of(Suit.Spades),
+                                                                7.Of(Suit.Spades),
+                                                                9.Of(Suit.Spades),
+                                                                10.Of(Suit.Clubs)
+                                                            });
 
             Assert.That(result.Count(), Is.EqualTo(5));
             Assert.That(result.All( x => x.Suit == Suit.Spades), Is.True, "Should contain the flush only.");
@@ -42,7 +42,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
                                 10.Of(Suit.Spades)
                             };
 
-            IEnumerable<Card> result = new Flush().Match(new Hand(cards));
+            IEnumerable<Card> result = new Flush().Match(cards);
 
             Assert.That(result.Count(), Is.EqualTo(5));
             Assert.That(result.All(x => x.Suit == Suit.Spades), Is.True, "Should contain the flush only.");
@@ -54,16 +54,16 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
         [Test]
         public void ShouldRejectANonFlush()
         {
-            IEnumerable<Card> result = new Flush().Match(new Hand(new[]
-                                                                                {
-                                                                                    Picture.King.Of(Suit.Diamonds),
-                                                                                    2.Of(Suit.Spades),
-                                                                                    3.Of(Suit.Spades),
-                                                                                    4.Of(Suit.Hearts),
-                                                                                    5.Of(Suit.Spades),
-                                                                                    6.Of(Suit.Spades),
-                                                                                    10.Of(Suit.Clubs)
-                                                                                }));
+            IEnumerable<Card> result = new Flush().Match(new[]
+                                                                {
+                                                                    Picture.King.Of(Suit.Diamonds),
+                                                                    2.Of(Suit.Spades),
+                                                                    3.Of(Suit.Spades),
+                                                                    4.Of(Suit.Hearts),
+                                                                    5.Of(Suit.Spades),
+                                                                    6.Of(Suit.Spades),
+                                                                    10.Of(Suit.Clubs)
+                                                                });
 
             Assert.That(result, Is.Null, "Should not have matching cards since the flush was not detected.");
 

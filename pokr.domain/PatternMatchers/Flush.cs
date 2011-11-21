@@ -6,13 +6,13 @@ namespace Pokr.Domain.PatternMatchers
 {
     internal class Flush : IHandPatternMatcher
     {
-        public IEnumerable<Card> Match(Hand hand)
+        public IEnumerable<Card> Match(IEnumerable<Card> cardsToMatch)
         {
-            var groupings = hand.Cards.GroupBy(x => x.Suit).Where( k => k.Count() >= 5).ToList();
+            var groupings = cardsToMatch.GroupBy(x => x.Suit).Where(k => k.Count() >= 5).ToList();
 
             if (groupings.Any())
             {
-                return (from card in hand.Cards
+                return (from card in cardsToMatch
                         where card.Suit == groupings.First().Key
                         orderby card.Rank descending
                         select card).Take(5);

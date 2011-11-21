@@ -5,7 +5,6 @@ namespace Pokr.Domain
         private readonly Suit _suit;
         private readonly int _rank;
 
-
         public Card(Suit suit, int rank)
         {
             _suit = suit;

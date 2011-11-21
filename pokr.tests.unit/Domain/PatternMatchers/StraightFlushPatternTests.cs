@@ -13,16 +13,16 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
         [Test]
         public void ShouldMatchStraightFlush()
         {
-            IEnumerable<Card> result = new StraightFlush().Match(new Hand(new[]
-                                                                              {
-                                                                                  Picture.Ace.Of(Suit.Clubs),   //
-                                                                                  Picture.King.Of(Suit.Clubs),  //
-                                                                                  Picture.Queen.Of(Suit.Clubs), //
-                                                                                  Picture.Jack.Of(Suit.Clubs),  //
-                                                                                  10.Of(Suit.Clubs),            //
-                                                                                  Picture.Ace.Of(Suit.Spades),
-                                                                                  2.Of(Suit.Hearts)
-                                                                              }));
+            IEnumerable<Card> result = new StraightFlush().Match(new[]
+                                                                    {
+                                                                        Picture.Ace.Of(Suit.Clubs),   //
+                                                                        Picture.King.Of(Suit.Clubs),  //
+                                                                        Picture.Queen.Of(Suit.Clubs), //
+                                                                        Picture.Jack.Of(Suit.Clubs),  //
+                                                                        10.Of(Suit.Clubs),            //
+                                                                        Picture.Ace.Of(Suit.Spades),
+                                                                        2.Of(Suit.Hearts)
+                                                                    });
 
             Assert.That( result.Count(), Is.EqualTo(5), "Should have matched this straight flush.");
         }
@@ -30,16 +30,16 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
         [Test]
         public void ShouldReject()
         {
-            IEnumerable<Card> result = new StraightFlush().Match(new Hand(new[]
-                                                                              {
-                                                                                  Picture.Ace.Of(Suit.Hearts),
-                                                                                  Picture.King.Of(Suit.Clubs),
-                                                                                  Picture.Queen.Of(Suit.Clubs),
-                                                                                  Picture.Jack.Of(Suit.Clubs),
-                                                                                  10.Of(Suit.Clubs),
-                                                                                  Picture.Ace.Of(Suit.Spades),
-                                                                                  2.Of(Suit.Hearts)
-                                                                              }));
+            IEnumerable<Card> result = new StraightFlush().Match(new[]
+                                                                    {
+                                                                        Picture.Ace.Of(Suit.Hearts),
+                                                                        Picture.King.Of(Suit.Clubs),
+                                                                        Picture.Queen.Of(Suit.Clubs),
+                                                                        Picture.Jack.Of(Suit.Clubs),
+                                                                        10.Of(Suit.Clubs),
+                                                                        Picture.Ace.Of(Suit.Spades),
+                                                                        2.Of(Suit.Hearts)
+                                                                    });
 
             Assert.That(result, Is.Null, "Should not have matched.");
         }
@@ -58,7 +58,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
                                 2.Of(Suit.Hearts)
                             };
 
-            IEnumerable<Card> result = new StraightFlush().Match(new Hand(cards));
+            IEnumerable<Card> result = new StraightFlush().Match(cards);
 
             Assert.That( result, Is.EquivalentTo( cards.OrderByDescending( x => x.Rank).Take(5)), 
                 "Should have matched the highest straight flush.");
@@ -78,7 +78,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
                                 2.Of(Suit.Hearts)
                             };
 
-            IEnumerable<Card> result = new StraightFlush().Match(new Hand(cards));
+            IEnumerable<Card> result = new StraightFlush().Match(cards);
 
             Assert.That(result.Count(), Is.EqualTo(5), "Should have matched this straight flush.");
         }
@@ -97,7 +97,7 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
                                 5.Of(Suit.Hearts)
                             };
 
-            IEnumerable<Card> result = new StraightFlush().Match(new Hand(cards));
+            IEnumerable<Card> result = new StraightFlush().Match(cards);
 
             Assert.That(result.Count(), Is.EqualTo(5), "Should have matched this straight flush.");
         }

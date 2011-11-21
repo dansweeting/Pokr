@@ -13,15 +13,15 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
         [Test]
         public void ShouldDetectFourOfAKind()
         {
-            IEnumerable<Card> result = new FourOfAKind().Match(new Hand(new[] {
-                                                                                             2.Of(Suit.Hearts),
-                                                                                             2.Of(Suit.Spades),
-                                                                                             2.Of(Suit.Clubs),
-                                                                                             2.Of(Suit.Diamonds),
-                                                                                             8.Of(Suit.Clubs),
-                                                                                             9.Of(Suit.Hearts),
-                                                                                             10.Of(Suit.Hearts)
-                                                                                         }));
+            IEnumerable<Card> result = new FourOfAKind().Match(new[] {
+                                                                    2.Of(Suit.Hearts),
+                                                                    2.Of(Suit.Spades),
+                                                                    2.Of(Suit.Clubs),
+                                                                    2.Of(Suit.Diamonds),
+                                                                    8.Of(Suit.Clubs),
+                                                                    9.Of(Suit.Hearts),
+                                                                    10.Of(Suit.Hearts)
+                                                                });
 
             Assert.That(result.Count(), Is.EqualTo(4),
                         "Should only have 4 cards in the winning cards collection.");
@@ -33,15 +33,16 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
         [Test]
         public void ShouldRejectIfNotFourOfAKind()
         {
-            IEnumerable<Card> result = new FourOfAKind().Match(new Hand(new[] {
-                                                                                             2.Of(Suit.Hearts),
-                                                                                             2.Of(Suit.Spades),
-                                                                                             5.Of(Suit.Clubs),
-                                                                                             6.Of(Suit.Diamonds),
-                                                                                             8.Of(Suit.Clubs),
-                                                                                             9.Of(Suit.Hearts),
-                                                                                             10.Of(Suit.Hearts)
-                                                                                         }));
+            IEnumerable<Card> result = new FourOfAKind().Match(new[] {
+                                                                        2.Of(Suit.Hearts),
+                                                                        2.Of(Suit.Spades),
+                                                                        5.Of(Suit.Clubs),
+                                                                        6.Of(Suit.Diamonds),
+                                                                        8.Of(Suit.Clubs),
+                                                                        9.Of(Suit.Hearts),
+                                                                        10.Of(Suit.Hearts)
+                                                                    });
+
             Assert.That(result, Is.Null, "Should not have matched anything.");
         }
     }

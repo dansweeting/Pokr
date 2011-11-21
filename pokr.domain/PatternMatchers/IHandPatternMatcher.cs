@@ -5,6 +5,6 @@ namespace Pokr.Domain.PatternMatchers
 {
     public interface IHandPatternMatcher
     {
-        IEnumerable<Card> Match(Hand hand);
+        IEnumerable<Card> Match(IEnumerable<Card> cardsToMatch);
     }
 }

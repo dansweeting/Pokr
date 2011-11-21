@@ -6,9 +6,9 @@ namespace Pokr.Domain.PatternMatchers
 {
     internal class HighCard : IHandPatternMatcher
     {
-        public IEnumerable<Card> Match(Hand hand)
+        public IEnumerable<Card> Match(IEnumerable<Card> cardsToMatch)
         {
-            return hand.Cards.OrderByDescending(x => x.Rank).Take(1);
+            return cardsToMatch.OrderByDescending(x => x.Rank).Take(1);
         }
     }
 }

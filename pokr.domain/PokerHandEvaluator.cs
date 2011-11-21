@@ -26,7 +26,7 @@ namespace Pokr.Domain
         {
             foreach (Rank rank in PatternLookup.Keys.OrderByDescending( x => x))
             {
-                var match = PatternLookup[rank].Match(hand);
+                var match = PatternLookup[rank].Match(hand.Cards);
                 if (match != null)
                 {
                     return new PokerHandScore(match, rank);

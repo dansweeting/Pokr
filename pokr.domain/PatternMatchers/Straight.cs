@@ -6,12 +6,36 @@ namespace Pokr.Domain.PatternMatchers
 {
     internal class Straight : IHandPatternMatcher
     {
-        public IEnumerable<Card> Match(Hand hand)
+        public IEnumerable<Card> Match(IEnumerable<Card> cardsToMatch)
+        {
+            //Ace can be used in a straight at the start (Ace-5) or end (10-Ace).
+
+            if (!cardsToMatch.Any(x => x.Rank == (int)Picture.Ace))
+                return MatchStraight(cardsToMatch);
+
+            var replaced = ReplaceTheAce(cardsToMatch);
+
+            return MatchStraight(cardsToMatch) ?? MatchStraight(replaced);
+
+        }
+
+        private static IEnumerable<Card> ReplaceTheAce(IEnumerable<Card> cardsToMatch)
+        {
+            var cards = cardsToMatch.ToList();
+            var ace = cards.First(x => x.Rank == (int) Picture.Ace);
+
+            cards.Remove(ace);
+            cards.Add(new Card(ace.Suit, 1));
+
+            return cards;
+        }
+
+        private static IEnumerable<Card> MatchStraight(IEnumerable<Card> cardsToMatch)
         {
             IList<Card> highestStraight = null;
-            var cards = hand.Cards.ToArray();
+            var cards = cardsToMatch.ToArray();
 
-            for (int i = 0; i < hand.Cards.Count; i++)
+            for (int i = 0; i < cardsToMatch.Count(); i++)
             {
                 var currentStraight = new List<Card> {cards[i]};
 

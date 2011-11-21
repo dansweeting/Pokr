@@ -5,9 +5,9 @@ namespace Pokr.Domain.PatternMatchers
 {
     internal class FourOfAKind : IHandPatternMatcher
     {
-        public IEnumerable<Card> Match(Hand hand)
+        public IEnumerable<Card> Match(IEnumerable<Card> cardsToMatch)
         {
-            return new NofAKind().Find(hand.Cards, 4);
+            return new NofAKind().Find(cardsToMatch, 4);
         }
     }
 }

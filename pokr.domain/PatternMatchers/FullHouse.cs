@@ -6,14 +6,14 @@ namespace Pokr.Domain.PatternMatchers
 {
     internal class FullHouse : IHandPatternMatcher
     {
-        public IEnumerable<Card> Match(Hand hand)
+        public IEnumerable<Card> Match(IEnumerable<Card> cardsToMatch)
         {
             var nofAKind = new NofAKind();
-            var threeOfAKind = nofAKind.Find(hand.Cards, 3);
+            var threeOfAKind = nofAKind.Find(cardsToMatch, 3);
 
             if (threeOfAKind != null)
             {
-                var restOfTheCards = hand.Cards.Except(threeOfAKind);
+                var restOfTheCards = cardsToMatch.Except(threeOfAKind);
 
                 IEnumerable<Card> currentPair, highestPair = null;
 
