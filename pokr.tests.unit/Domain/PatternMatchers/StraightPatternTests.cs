@@ -62,5 +62,21 @@ namespace Pokr.Tests.Unit.Domain.PatternMatchers
             Assert.That(result, Is.Null, "Should not have matched anything.");
 
         }
+
+        [Test]
+        public void ShouldDetectAceAsALowCard()
+        {
+            IEnumerable<Card> result = new Straight().Match(new[] {
+                                                                Picture.Ace.Of(Suit.Hearts),
+                                                                2.Of(Suit.Spades),
+                                                                3.Of(Suit.Clubs),
+                                                                4.Of(Suit.Diamonds),
+                                                                5.Of(Suit.Clubs),
+                                                                9.Of(Suit.Hearts),
+                                                                10.Of(Suit.Hearts)
+                                                            });
+
+            Assert.That(result.Count(), Is.EqualTo(5), "Should detect the ace as a low card when applicable.");
+        }
     }
 }
