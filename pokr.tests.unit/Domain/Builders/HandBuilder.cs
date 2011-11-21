@@ -24,5 +24,11 @@ namespace Pokr.Tests.Unit.Domain.Builders
         {
             return new Hand(_cards);
         }
+
+        public HandBuilder WithThreeOfAKind(int value)
+        {
+            _cards.AddRange( new [] {value.Of(Suit.Clubs), value.Of(Suit.Diamonds), value.Of(Suit.Hearts)});
+            return this;
+        }
     }
 }

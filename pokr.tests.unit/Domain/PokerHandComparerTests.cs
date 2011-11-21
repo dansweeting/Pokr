@@ -78,13 +78,55 @@ namespace Pokr.Tests.Unit.Domain
         [Test]
         public void ShouldHandleEqualHands()
         {
-            throw new NotImplementedException();
+            Hand left = new HandBuilder()
+                .WithThreeOfAKind(7)
+                .WithCard(2.Of(Suit.Hearts))
+                .WithCard(3.Of(Suit.Clubs))
+                .Build();
+
+            Hand right = new HandBuilder()
+                .WithThreeOfAKind(7)
+                .WithCard(2.Of(Suit.Clubs))
+                .WithCard(3.Of(Suit.Diamonds))
+                .Build();
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(left))
+                .Returns(new PokerHandScore(left.Cards.Where(x => x.Rank == 7), Rank.ThreeOfAKind));
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(right))
+                .Returns(new PokerHandScore(right.Cards.Where(x => x.Rank == 7), Rank.ThreeOfAKind));
+
+            Assert.That( Subject.Compare(left,right), Is.EqualTo(0), "Hands should be equal." );
+
         }
 
         [Test]
         public void ShouldHandleHandsOfEqualRankAndDifferentCardValues()
         {
-            throw new NotImplementedException();
+            Hand winner = new HandBuilder()
+                .WithThreeOfAKind(5)
+                .WithCard(10.Of(Suit.Spades))
+                .WithCard(9.Of(Suit.Hearts))
+                .Build();
+
+            Hand loser = new HandBuilder()
+                .WithThreeOfAKind(4)
+                .WithCard(10.Of(Suit.Spades))
+                .WithCard(9.Of(Suit.Hearts))
+                .Build();
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(winner))
+                .Returns(new PokerHandScore(winner.Cards.Where(x => x.Rank == 5), Rank.ThreeOfAKind));
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(loser))
+                .Returns(new PokerHandScore(loser.Cards.Where(x => x.Rank == 4), Rank.ThreeOfAKind));
+
+            Assert.That(Subject.Compare(loser, winner), Is.EqualTo(-1), "Should have compared the correct loser.");
+            Assert.That(Subject.Compare(winner, loser), Is.EqualTo( 1), "Should have compared the correct loser.");
         }
 
         [Test]

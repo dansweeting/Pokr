@@ -24,10 +24,24 @@ namespace Pokr.Domain
 
             if (scoreX.Rank == scoreY.Rank)
             {
+                return CompareEqualRankedHands(x, y, scoreY, scoreX);
+            }
+
+            return scoreX.Rank - scoreY.Rank;
+        }
+
+        private static int CompareEqualRankedHands(Hand x, Hand y, PokerHandScore scoreY, PokerHandScore scoreX)
+        {
+            int maxX = scoreX.Cards.Max(c => c.Rank);
+            int maxY = scoreY.Cards.Max(c => c.Rank);
+            
+            if (maxX == maxY)
+            {
+
                 var remainX = x.Cards.Except(scoreX.Cards).OrderByDescending(c => c.Rank).ToArray();
                 var remainY = y.Cards.Except(scoreY.Cards).OrderByDescending(c => c.Rank).ToArray();
 
-                for( int i = 0; i < remainX.Length; i++)
+                for (int i = 0; i < remainX.Length; i++)
                 {
                     if (remainX[i].Rank == remainY[i].Rank)
                         continue;
@@ -35,10 +49,10 @@ namespace Pokr.Domain
                     return remainX[i].Rank - remainY[i].Rank;
                 }
 
-                throw new NotImplementedException();
+                return 0;
             }
 
-            return scoreX.Rank - scoreY.Rank;
+            return maxX - maxY;
         }
     }
 }
