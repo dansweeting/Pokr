@@ -103,7 +103,7 @@ namespace Pokr.Tests.Unit.Domain
         }
 
         [Test]
-        public void ShouldHandleHandsOfEqualRankAndDifferentCardValues()
+        public void ShouldHandleHandsOfEqualRankButDifferentCardValues()
         {
             Hand winner = new Hand(new CardsBuilder()
                 .WithThreeOfAKind(5)
@@ -130,9 +130,150 @@ namespace Pokr.Tests.Unit.Domain
         }
 
         [Test]
-        public void ShouldHandleTwoPairComparisons()
+        public void ShouldHandleTwoPairWhenHighPairsDiffer()
         {
-            throw new NotImplementedException();
+            Hand winner = new Hand(new CardsBuilder()
+                .WithPair(10)
+                .WithPair(8)
+                .WithCard(3.Of(Suit.Hearts))
+                .Build());
+
+            Hand loser = new Hand(new CardsBuilder()
+                .WithPair(9)
+                .WithPair(8)
+                .WithCard(3.Of(Suit.Hearts))
+                .Build());
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(winner))
+                .Returns(new PokerHandScore(winner.Cards.Where(x => x.Rank != 3), Rank.TwoPair));
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(loser))
+                .Returns(new PokerHandScore(loser.Cards.Where(x => x.Rank != 3), Rank.TwoPair));
+
+            Assert.That(Subject.Compare(loser, winner), Is.EqualTo(-1), "Should have compared the correct loser.");
+            Assert.That(Subject.Compare(winner, loser), Is.EqualTo(1), "Should have compared the correct loser.");
+        }
+
+        [Test]
+        public void ShouldHandleTwoPairWhenLowPairsDiffer()
+        {
+            Hand winner = new Hand(new CardsBuilder()
+                .WithPair(9)
+                .WithPair(8)
+                .WithCard(3.Of(Suit.Hearts))
+                .Build());
+
+            Hand loser = new Hand(new CardsBuilder()
+                .WithPair(9)
+                .WithPair(7)
+                .WithCard(3.Of(Suit.Hearts))
+                .Build());
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(winner))
+                .Returns(new PokerHandScore(winner.Cards.Where(x => x.Rank != 3), Rank.TwoPair));
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(loser))
+                .Returns(new PokerHandScore(loser.Cards.Where(x => x.Rank != 3), Rank.TwoPair));
+
+            Assert.That(Subject.Compare(loser, winner), Is.EqualTo(-1), "Should have compared the correct loser.");
+            Assert.That(Subject.Compare(winner, loser), Is.EqualTo(1), "Should have compared the correct loser.");
+        }
+
+        [Test]
+        public void ShouldHandleFullHouseWhenTripsDiffer()
+        {
+            Hand winner = new Hand(new CardsBuilder()
+                .WithFullHouse(10,5)
+                .Build());
+
+            Hand loser = new Hand(new CardsBuilder()
+                .WithFullHouse(9, 5)
+                .Build());
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(winner))
+                .Returns(new PokerHandScore(winner.Cards, Rank.FullHouse));
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(loser))
+                .Returns(new PokerHandScore(loser.Cards, Rank.FullHouse));
+
+            Assert.That(Subject.Compare(loser, winner), Is.EqualTo(-1));
+            Assert.That(Subject.Compare(winner, loser), Is.EqualTo( 1));
+        }
+
+        [Test]
+        public void ShouldHandleFullHouseWhenPairsDiffer()
+        {
+            Hand winner = new Hand(new CardsBuilder()
+                .WithFullHouse(10, 5)
+                .Build());
+
+            Hand loser = new Hand(new CardsBuilder()
+                .WithFullHouse(10, 4)
+                .Build());
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(winner))
+                .Returns(new PokerHandScore(winner.Cards, Rank.FullHouse));
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(loser))
+                .Returns(new PokerHandScore(loser.Cards, Rank.FullHouse));
+
+            Assert.That(Subject.Compare(loser, winner), Is.EqualTo(-1));
+            Assert.That(Subject.Compare(winner, loser), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ShouldHandleStraights()
+        {
+            Hand winner = new Hand(new CardsBuilder()
+                .WithStraight(10)
+                .Build());
+
+            Hand loser = new Hand(new CardsBuilder()
+                .WithStraight(9)
+                .Build());
+
+            Mocked<IPokerHandEvaluator>()
+               .Setup(x => x.Evaluate(winner))
+               .Returns(new PokerHandScore(winner.Cards, Rank.Straight));
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(loser))
+                .Returns(new PokerHandScore(loser.Cards, Rank.Straight));
+
+            Assert.That(Subject.Compare(loser, winner), Is.EqualTo(-1));
+            Assert.That(Subject.Compare(winner, loser), Is.EqualTo(1));
+
+        }
+
+        [Test]
+        public void ShouldHandleFlushes()
+        {
+            Hand winner = new Hand(new CardsBuilder()
+                .WithFlush(Suit.Diamonds, 10)
+                .Build());
+
+            Hand loser = new Hand(new CardsBuilder()
+                .WithFlush(Suit.Clubs, 9)
+                .Build());
+
+            Mocked<IPokerHandEvaluator>()
+               .Setup(x => x.Evaluate(winner))
+               .Returns(new PokerHandScore(winner.Cards, Rank.Flush));
+
+            Mocked<IPokerHandEvaluator>()
+                .Setup(x => x.Evaluate(loser))
+                .Returns(new PokerHandScore(loser.Cards, Rank.Flush));
+
+            Assert.That(Subject.Compare(loser, winner), Is.EqualTo(-1));
+            Assert.That(Subject.Compare(winner, loser), Is.EqualTo(1));
         }
     }
 }

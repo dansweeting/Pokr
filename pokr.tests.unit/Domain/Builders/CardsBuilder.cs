@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Pokr.Domain;
 using Pokr.Domain.HoldEm;
 
@@ -28,6 +30,40 @@ namespace Pokr.Tests.Unit.Domain.Builders
         public CardsBuilder WithThreeOfAKind(int value)
         {
             _cards.AddRange( new [] {value.Of(Suit.Clubs), value.Of(Suit.Diamonds), value.Of(Suit.Hearts)});
+            return this;
+        }
+
+        public CardsBuilder WithFullHouse(int tripletRank, int pairRank)
+        {
+            _cards.AddRange(new [] 
+                    {tripletRank.Of(Suit.Hearts), tripletRank.Of(Suit.Diamonds), tripletRank.Of(Suit.Spades),
+                     pairRank.Of(Suit.Spades), pairRank.Of(Suit.Hearts) }
+                );
+
+            return this;
+        }
+
+        public CardsBuilder WithStraight(int max)
+        {
+            var rand = new Random();
+
+            for (int i = max; i > max-5 ; i--)
+            {
+                _cards.Add(new Card( (Suit)rand.Next(4), i ));                
+            }
+
+            return this;
+        }
+
+        public CardsBuilder WithFlush(Suit suit, int max)
+        {
+            var rand = new Random();
+
+            for (int i = 0; i < 5; i++)
+            {
+                _cards.Add(new Card(suit, rand.Next(max+1)));    
+            }
+            
             return this;
         }
     }
