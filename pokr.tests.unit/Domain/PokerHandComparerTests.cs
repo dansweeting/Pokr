@@ -51,17 +51,17 @@ namespace Pokr.Tests.Unit.Domain
         [Test]
         public void ShouldCompareWithKickersWhenHandsHaveSameRank()
         {
-            Hand losingHand = new HandBuilder()
+            Hand losingHand = new Hand(new CardsBuilder()
                 .WithPair(5)
                 .WithCard(10.Of(Suit.Clubs))
                 .WithCard(2.Of(Suit.Spades))
-                .Build();
+                .Build());
 
-            Hand winningHand = new HandBuilder()
+            Hand winningHand = new Hand(new CardsBuilder()
                 .WithPair(5)
                 .WithCard(10.Of(Suit.Spades))
                 .WithCard(3.Of(Suit.Clubs))
-                .Build();
+                .Build());
 
             Mocked<IPokerHandEvaluator>()
                 .Setup(x => x.Evaluate(losingHand))
@@ -78,17 +78,17 @@ namespace Pokr.Tests.Unit.Domain
         [Test]
         public void ShouldHandleEqualHands()
         {
-            Hand left = new HandBuilder()
+            Hand left = new Hand(new CardsBuilder()
                 .WithThreeOfAKind(7)
                 .WithCard(2.Of(Suit.Hearts))
                 .WithCard(3.Of(Suit.Clubs))
-                .Build();
+                .Build());
 
-            Hand right = new HandBuilder()
+            Hand right = new Hand(new CardsBuilder()
                 .WithThreeOfAKind(7)
                 .WithCard(2.Of(Suit.Clubs))
                 .WithCard(3.Of(Suit.Diamonds))
-                .Build();
+                .Build());
 
             Mocked<IPokerHandEvaluator>()
                 .Setup(x => x.Evaluate(left))
@@ -105,17 +105,17 @@ namespace Pokr.Tests.Unit.Domain
         [Test]
         public void ShouldHandleHandsOfEqualRankAndDifferentCardValues()
         {
-            Hand winner = new HandBuilder()
+            Hand winner = new Hand(new CardsBuilder()
                 .WithThreeOfAKind(5)
                 .WithCard(10.Of(Suit.Spades))
                 .WithCard(9.Of(Suit.Hearts))
-                .Build();
+                .Build());
 
-            Hand loser = new HandBuilder()
+            Hand loser = new Hand(new CardsBuilder()
                 .WithThreeOfAKind(4)
                 .WithCard(10.Of(Suit.Spades))
                 .WithCard(9.Of(Suit.Hearts))
-                .Build();
+                .Build());
 
             Mocked<IPokerHandEvaluator>()
                 .Setup(x => x.Evaluate(winner))

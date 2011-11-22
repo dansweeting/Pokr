@@ -4,28 +4,28 @@ using Pokr.Domain.HoldEm;
 
 namespace Pokr.Tests.Unit.Domain.Builders
 {
-    public class HandBuilder
+    public class CardsBuilder
     {
         private readonly List<Card> _cards = new List<Card>();
 
-        public HandBuilder WithPair(int value)
+        public CardsBuilder WithPair(int value)
         {
             _cards.AddRange(new [] { value.Of(Suit.Spades), value.Of(Suit.Diamonds) });
             return this;
         }
 
-        public HandBuilder WithCard(Card card)
+        public CardsBuilder WithCard(Card card)
         {
             _cards.Add(card);
             return this;
         }
 
-        public Hand Build()
+        public IEnumerable<Card> Build()
         {
-            return new Hand(_cards);
+            return _cards;
         }
 
-        public HandBuilder WithThreeOfAKind(int value)
+        public CardsBuilder WithThreeOfAKind(int value)
         {
             _cards.AddRange( new [] {value.Of(Suit.Clubs), value.Of(Suit.Diamonds), value.Of(Suit.Hearts)});
             return this;
