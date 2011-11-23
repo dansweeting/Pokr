@@ -32,9 +32,28 @@ namespace Pokr.Domain
 
         private static int CompareEqualRankedHands(Hand x, Hand y, PokerHandScore scoreY, PokerHandScore scoreX)
         {
+            IEnumerable<Card> scoreXCards = scoreX.Cards;
+            IEnumerable<Card> scoreYCards = scoreY.Cards;
+
+            while (scoreXCards.Any())
+            {
+                var highestX = scoreXCards.Max(c => c.Rank);
+                var highestY = scoreYCards.Max(c => c.Rank);
+
+                if (highestX == highestY)
+                {
+                    scoreXCards = scoreXCards.Where(c => c.Rank != highestX);
+                    scoreYCards = scoreYCards.Where(c => c.Rank != highestX);
+                    continue;
+                }
+
+                return highestX - highestY;
+            }
+
             int maxX = scoreX.Cards.Max(c => c.Rank);
             int maxY = scoreY.Cards.Max(c => c.Rank);
-            
+
+            //Remaining 
             if (maxX == maxY)
             {
 
