@@ -59,9 +59,11 @@ namespace Pokr.Tests.Unit.Domain.Builders
         {
             var rand = new Random();
 
-            for (int i = 0; i < 5; i++)
+            _cards.Add(new Card(suit,max));
+
+            for (int i = 0; i < 4; i++)
             {
-                _cards.Add(new Card(suit, rand.Next(max+1)));    
+                _cards.Add(new Card(suit, rand.Next(max)));    
             }
             
             return this;
