@@ -24,54 +24,35 @@ namespace Pokr.Domain
 
             if (scoreX.Rank == scoreY.Rank)
             {
-                return CompareEqualRankedHands(x, y, scoreY, scoreX);
+                int comparisonNoKickers = CompareEqualPokerHandScores(scoreX.Cards, scoreY.Cards);
+
+                return comparisonNoKickers != 0 ?
+                    comparisonNoKickers :
+                    CompareEqualPokerHandScores(x.Cards.Except(scoreX.Cards), y.Cards.Except(scoreY.Cards));
             }
 
             return scoreX.Rank - scoreY.Rank;
         }
-
-        private static int CompareEqualRankedHands(Hand x, Hand y, PokerHandScore scoreY, PokerHandScore scoreX)
+        
+        private static int CompareEqualPokerHandScores(IEnumerable<Card> x, IEnumerable<Card> y)
         {
-            IEnumerable<Card> scoreXCards = scoreX.Cards;
-            IEnumerable<Card> scoreYCards = scoreY.Cards;
-
-            while (scoreXCards.Any())
+            IEnumerable<Card> xCards = x;
+            IEnumerable<Card> yCards = y;
+            while (xCards.Any())
             {
-                var highestX = scoreXCards.Max(c => c.Rank);
-                var highestY = scoreYCards.Max(c => c.Rank);
+                var highestX = xCards.Max(c => c.Rank);
+                var highestY = yCards.Max(c => c.Rank);
 
                 if (highestX == highestY)
                 {
-                    scoreXCards = scoreXCards.Where(c => c.Rank != highestX);
-                    scoreYCards = scoreYCards.Where(c => c.Rank != highestX);
+                    xCards = xCards.Where(c => c.Rank != highestX);
+                    yCards = yCards.Where(c => c.Rank != highestX);
                     continue;
                 }
 
                 return highestX - highestY;
             }
-
-            int maxX = scoreX.Cards.Max(c => c.Rank);
-            int maxY = scoreY.Cards.Max(c => c.Rank);
-
-            //Remaining 
-            if (maxX == maxY)
-            {
-
-                var remainX = x.Cards.Except(scoreX.Cards).OrderByDescending(c => c.Rank).ToArray();
-                var remainY = y.Cards.Except(scoreY.Cards).OrderByDescending(c => c.Rank).ToArray();
-
-                for (int i = 0; i < remainX.Length; i++)
-                {
-                    if (remainX[i].Rank == remainY[i].Rank)
-                        continue;
-
-                    return remainX[i].Rank - remainY[i].Rank;
-                }
-
-                return 0;
-            }
-
-            return maxX - maxY;
+            return 0;
         }
     }
 }
